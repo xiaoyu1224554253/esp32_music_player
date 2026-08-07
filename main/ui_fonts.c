@@ -6,7 +6,8 @@
  */
 #include "lvgl/lvgl.h"
 
-/* 占位: 仅含 ASCII, 中文显示会 fallback 为方框。CI 生成后覆盖。 */
-LV_FONT_DECLARE(lv_font_montserrat_16);
-const lv_font_t font_cn_16 = lv_font_montserrat_16;
-const lv_font_t font_cn_22 = lv_font_montserrat_16;
+/* 占位字体: 合法的最小 lv_font_t 对象。
+ * CI 中的 gen_fonts.py 会生成完整中文字库并整体覆盖本文件。
+ * 若 CI 未生成, 此处保证编译通过 (中文显示为默认字形)。 */
+const lv_font_t font_cn_16 = {0};
+const lv_font_t font_cn_22 = {0};

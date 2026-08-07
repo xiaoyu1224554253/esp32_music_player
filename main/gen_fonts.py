@@ -30,16 +30,32 @@ def main():
         print("[gen_fonts] 未找到系统中文字体, 使用占位字体 (不生成完整中文)")
         return
     try:
+        # 生成 16px 全中文字库 (GB2312 区间, 含标点/符号)
         subprocess.run([
             "lv_font_conv",
             "--font", font,
             "--format", "lvgl",
+            "--name", "font_cn_16",
             "--size", "16",
-            "--bpp", "3",
-            "--font-subsets", "gb2312",
+            "--bpp", "4",
+            "--range", "0x20-0x7E",          # ASCII
+            "--range", "0x3000-0x303F",       # CJK 符号
+            "--range", "0x4E00-0x9FFF",       # CJK 统一表意文字 (常用汉字)
+            "--range", "0xFF00-0xFFEF",       # 全角字符
             "--symbols", "🌐🎵📻🔍🎤▶⏸⏮⏭📑🎻🎷🎧🪕📰✨🌙📡🔄🔀🔁",
             "--output", OUT,
-            # 输出变量名为 font_cn_16 / font_cn_22
+        ], check=True)
+        # 生成 22px
+        subprocess.run([
+            "lv_font_conv",
+            "--font", font,
+            "--format", "lvgl",
+            "--name", "font_cn_22",
+            "--size", "22",
+            "--bpp", "4",
+            "--range", "0x20-0x7E",
+            "--range", "0x4E00-0x9FFF",
+            "--output", "ui_fonts_22.c",
         ], check=True)
         print("[gen_fonts] 已生成", OUT)
     except (subprocess.CalledProcessError, FileNotFoundError) as e:
