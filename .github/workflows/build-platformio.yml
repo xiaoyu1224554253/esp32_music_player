@@ -1,0 +1,38 @@
+name: Build PlatformIO (Arduino)
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: PlatformIO firmware
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install PlatformIO
+        run: |
+          python -m pip install --upgrade pip
+          pip install platformio
+
+      - name: Build (pio run)
+        run: pio run -e esp32-s3-devkitc-1
+
+      - name: Upload firmware artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: platformio-firmware
+          path: |
+            .pio/build/*/firmware.bin
+            .pio/build/*/partitions.bin
+            .pio/build/*/bootloader.bin
+          if-no-files-found: warn

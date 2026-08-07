@@ -1,0 +1,38 @@
+name: Build ESP-IDF
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: ESP-IDF firmware
+    runs-on: ubuntu-latest
+    container:
+      image: espressif/idf:release-v6.0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build (idf.py)
+        shell: bash
+        run: |
+          . $IDF_PATH/export.sh
+          idf.py set-target esp32s3
+          idf.py build
+
+      - name: Upload firmware artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: esp-idf-firmware
+          path: |
+            build/*.bin
+            build/*.elf
+            build/*.map
+            build/bootloader/*.bin
+            build/partition_table/*.bin
+          if-no-files-found: warn
