@@ -1,13 +1,15 @@
-/* ILI9341V SPI 显示驱动 (基于 ESP-IDF esp_lcd) */
+/* ILI9341V SPI 显示驱动 (基于 ESP-IDF esp_lcd, v6.0 API) */
 #include "disp_driver.h"
 #include "board.h"
 #include "esp_lcd_panel_io.h"
 #include "esp_lcd_panel_vendor.h"
 #include "esp_lcd_panel_ops.h"
+#include "esp_lcd_panel.h"
 #include "esp_lcd_ili9341.h"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
 #include "esp_err.h"
+#include "esp_check.h"
 
 static esp_lcd_panel_handle_t panel_handle = NULL;
 static esp_lcd_panel_io_handle_t io_handle = NULL;
@@ -50,14 +52,12 @@ esp_err_t disp_driver_init(void)
     };
     ESP_RETURN_ON_ERROR(esp_lcd_new_panel_io_spi((esp_lcd_spi_bus_handle_t)LCD_SPI_HOST, &io_cfg, &io_handle), "disp", "io");
 
-    /* ILI9341 面板 */
+    /* ILI9341 面板 (ESP-IDF v6.0 API) */
     esp_lcd_panel_dev_config_t panel_cfg = {
         .reset_gpio_num = PIN_LCD_RST,
-        .color_space = ESP_LCD_COLOR_SPACE_RGB,
+        .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_RGB,
         .bits_per_pixel = 18,   /* ILI9341V 常用 18bit; 若偏色改 16 */
-        .rst_active_level = 0,
-        .init_cmds = NULL,
-        .init_cmds_size = 0,
+        .flags.reset_active_high = 0,
     };
     ESP_RETURN_ON_ERROR(esp_lcd_new_panel_ili9341(io_handle, &panel_cfg, &panel_handle), "disp", "panel");
     ESP_RETURN_ON_ERROR(esp_lcd_panel_reset(panel_handle), "disp", "reset");
