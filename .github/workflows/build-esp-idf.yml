@@ -34,25 +34,14 @@ jobs:
           . $IDF_PATH/export.sh
           rm -rf managed_components dependencies.lock build
           idf.py set-target esp32s3
-          idf.py build || true
-
-      - name: Debug dump lvgl layout
-        if: always()
-        shell: bash
-        run: |
-          echo "=== find lvgl.h in managed_components ==="
-          find managed_components/lvgl__lvgl -name 'lvgl.h' 2>/dev/null || echo "NO lvgl.h FOUND"
-          echo "=== top dirs of lvgl__lvgl ==="
-          ls -la managed_components/lvgl__lvgl 2>/dev/null || echo "NO lvgl__lvgl dir"
+          idf.py build
 
       - name: Upload firmware artifacts
         uses: actions/upload-artifact@v4
         with:
           name: esp-idf-firmware
           path: |
-            build/*.bin
-            build/*.elf
-            build/*.map
-            build/bootloader/*.bin
-            build/partition_table/*.bin
-          if-no-files-found: warn
+            build/esp32_music_player.bin
+            build/bootloader/bootloader.bin
+            build/partition_table/partition-table.bin
+          if-no-files-found: error
