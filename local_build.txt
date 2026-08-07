@@ -1,0 +1,10 @@
+﻿python.exe : ERROR: F:\Espressif\espidf.constraints.v6.0.txt doesn't exist. Perhaps you've forgotten to run the install
+ scripts. Please check the installation guide for more information.
+所在位置 行:1 字符: 605
++ ... esktop\567; & "$py\python.exe" "F:\Espressif\esp-idf\tools\idf.py" bu ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ERROR: F:\Espre...re information.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+ESP-IDF v6.0.2

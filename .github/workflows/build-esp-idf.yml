@@ -42,6 +42,7 @@ jobs:
           name: esp-idf-firmware
           path: |
             build/esp32_music_player.bin
+            build/esp32_music_player.elf
             build/bootloader/bootloader.bin
             build/partition_table/partition-table.bin
           if-no-files-found: error
