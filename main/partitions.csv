@@ -1,0 +1,8 @@
+# ESP-IDF 自定义分区表 (ES3C28P, 16MB Flash)
+# 全中文字库较大, 需放大 factory 分区并预留字体分区
+# Name,   Type, SubType, Offset,   Size,     Flags
+nvs,      data, nvs,     0x9000,   0x6000,
+phy_init, data, phy,     0xf000,   0x1000,
+factory,  app,  factory, 0x10000,  0xA00000,
+font,     data, spiffs,  0xA10000, 0x400000,
+vfs,      data, spiffs,  0xE10000, 0x1F0000,
