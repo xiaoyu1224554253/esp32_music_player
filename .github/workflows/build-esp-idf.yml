@@ -34,13 +34,16 @@ jobs:
           . $IDF_PATH/export.sh
           rm -rf managed_components dependencies.lock build
           idf.py set-target esp32s3
-          idf.py reconfigure
+          idf.py build
 
-      - name: Build (idf.py)
+      - name: Debug: dump lvgl package layout
+        if: always()
         shell: bash
         run: |
-          . $IDF_PATH/export.sh
-          idf.py build
+          echo "=== find lvgl.h in managed_components ==="
+          find managed_components/lvgl__lvgl -name 'lvgl.h' 2>/dev/null || echo "NO lvgl.h FOUND"
+          echo "=== top dirs of lvgl__lvgl ==="
+          ls -la managed_components/lvgl__lvgl 2>/dev/null || echo "NO lvgl__lvgl dir"
 
       - name: Upload firmware artifacts
         uses: actions/upload-artifact@v4
