@@ -3,7 +3,7 @@
  * 灵镜 AI 音响 · 320x240 深色主题
  */
 #include "ui.h"
-#include "lvgl/lvgl.h"
+#include "lvgl.h"
 #include <string.h>
 
 /* ===== 设计令牌 (来自原型 CSS) ===== */

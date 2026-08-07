@@ -2,7 +2,7 @@
 #include <string.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "lvgl/lvgl.h"
+#include "lvgl.h"
 #include "esp_timer.h"
 #include "disp_driver.h"
 #include "tp_driver.h"

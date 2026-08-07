@@ -4,7 +4,7 @@
  * 此处提供最小占位字体, 保证仓库可直接编译出骨架 (无中文渲染)。
  * 完整中文需 CI 生成: python gen_fonts.py
  */
-#include "lvgl/lvgl.h"
+#include "lvgl.h"
 
 /* 占位字体: 合法的最小 lv_font_t 对象。
  * CI 中的 gen_fonts.py 会生成完整中文字库并整体覆盖本文件。
