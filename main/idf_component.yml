@@ -1,6 +1,6 @@
 # 主组件依赖: LVGL 从 ESP 组件注册表拉取
 dependencies:
   lvgl/lvgl:
-    version: ">=8.3.0"
+    version: "~8.3.0"
   espressif/esp_lcd_ili9341:
     version: "^2.0.0"

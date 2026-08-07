@@ -28,11 +28,18 @@ jobs:
           . $IDF_PATH/export.sh
           python main/gen_fonts.py
 
+      - name: Re-resolve dependencies (clear dirty managed_components)
+        shell: bash
+        run: |
+          . $IDF_PATH/export.sh
+          rm -rf managed_components dependencies.lock build
+          idf.py set-target esp32s3
+          idf.py reconfigure
+
       - name: Build (idf.py)
         shell: bash
         run: |
           . $IDF_PATH/export.sh
-          idf.py set-target esp32s3
           idf.py build
 
       - name: Upload firmware artifacts
