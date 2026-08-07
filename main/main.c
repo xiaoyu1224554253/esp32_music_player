@@ -36,24 +36,17 @@ void app_main(void)
     /* LVGL 初始化 */
     lv_init();
 
-    static lv_disp_draw_buf_t draw_buf;
     static lv_color_t buf1[LCD_H_RES * 20];
     static lv_color_t buf2[LCD_H_RES * 20];
-    lv_disp_draw_buf_init(&draw_buf, buf1, buf2, LCD_H_RES * 20);
 
-    static lv_disp_drv_t disp_drv;
-    lv_disp_drv_init(&disp_drv);
-    disp_drv.hor_res = LCD_H_RES;
-    disp_drv.ver_res = LCD_V_RES;
-    disp_drv.flush_cb = disp_driver_flush;
-    disp_drv.draw_buf = &draw_buf;
-    lv_disp_drv_register(&disp_drv);
+    lv_display_t *disp = lv_display_create(LCD_H_RES, LCD_V_RES);
+    lv_display_set_flush_cb(disp, disp_driver_flush);
+    lv_display_set_draw_buffers(disp, buf1, buf2, sizeof(buf1),
+                                 LV_DISPLAY_RENDER_MODE_PARTIAL);
 
-    static lv_indev_drv_t indev_drv;
-    lv_indev_drv_init(&indev_drv);
-    indev_drv.type = LV_INDEV_TYPE_POINTER;
-    indev_drv.read_cb = tp_driver_read;
-    lv_indev_drv_register(&indev_drv);
+    lv_indev_t *indev = lv_indev_create();
+    lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER);
+    lv_indev_set_read_cb(indev, tp_driver_read);
 
     /* UI */
     ui_init();

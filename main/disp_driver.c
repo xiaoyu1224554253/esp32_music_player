@@ -71,12 +71,12 @@ esp_err_t disp_driver_init(void)
     return ESP_OK;
 }
 
-/* LVGL flush 回调 */
-void disp_driver_flush(lv_disp_drv_t *drv, const lv_area_t *area, lv_color_t *color_p)
+/* LVGL 9 flush 回调 */
+void disp_driver_flush(lv_display_t *disp, const lv_area_t *area, lv_color_t *color_p)
 {
     int x1 = area->x1, y1 = area->y1, x2 = area->x2, y2 = area->y2;
     esp_lcd_panel_draw_bitmap(panel_handle, x1, y1, x2 + 1, y2 + 1, color_p);
-    lv_disp_flush_ready(drv);
+    lv_display_flush_ready(disp);
 }
 
 esp_lcd_panel_handle_t disp_driver_get_panel(void) { return panel_handle; }

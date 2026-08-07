@@ -67,8 +67,8 @@ esp_err_t tp_driver_init(void)
     return ESP_OK;
 }
 
-/* LVGL read 回调: 返回当前触摸点 */
-void tp_driver_read(lv_indev_drv_t *drv, lv_indev_data_t *data)
+/* LVGL 9 read 回调: 返回当前触摸点 */
+void tp_driver_read(lv_indev_t *indev, lv_indev_data_t *data)
 {
     uint8_t status = 0;
     if (tp_read_reg(REG_TD_STATUS, &status, 1) != ESP_OK) {

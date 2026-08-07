@@ -1,5 +1,5 @@
 /*
- * 音乐播放器 UI (LVGL) - 复刻 music_player_ui_prototype.html
+ * 音乐播放器 UI (LVGL 9.5) - 复刻 music_player_ui_prototype.html
  * 灵镜 AI 音响 · 320x240 深色主题
  */
 #include "ui.h"
@@ -230,8 +230,9 @@ static void build_playlist(lv_obj_t *parent)
     lv_obj_set_style_pad_all(list, 0, 0);
 
     for (int i = 0; i < N_SONGS; i++) {
-        lv_obj_t *item = lv_list_add_btn(list, NULL, playlist[i].name);
-        lbl_playlist_items[i] = lv_obj_get_child(item, 1); /* label */
+        /* LVGL 9: lv_list_add_button 返回 lv_button, label 是其首个 child */
+        lv_obj_t *item = lv_list_add_button(list, NULL, playlist[i].name);
+        lbl_playlist_items[i] = lv_obj_get_child(item, 0);
         lv_obj_set_style_text_font(lbl_playlist_items[i], &font_cn_16, 0);
         lv_obj_set_style_bg_opa(item, LV_OPA_TRANSP, 0);
         lv_obj_set_style_border_color(item, C_BORDER, 0);
@@ -263,15 +264,9 @@ static void build_radio(lv_obj_t *parent)
     lv_obj_set_style_text_font(c, &font_cn_16, 0);
     lv_obj_set_style_text_color(c, C_TEXTM, 0);
 
-    char *stations[8][2] = {
-        { "华语流行 FM", "热门金曲 24h 不停歇" },
-        { "古典音乐厅", "交响乐与室内乐精选" },
-        { "爵士咖啡馆", "慵懒午后 轻松爵士" },
-        { "电音浪潮",   "EDM / House / Techno" },
-        { "民谣时光",   "城市与远方的故事" },
-        { "新闻资讯台", "整点新闻 + 天气播报" },
-        { "ACG 动漫电台", "二次元 OST / OP / ED" },
-        { "深夜故事会", "情感夜话 治愈陪伴" },
+    const char *stations[8] = {
+        "华语流行 FM", "古典音乐厅", "爵士咖啡馆", "电音浪潮",
+        "民谣时光", "新闻资讯台", "ACG 动漫电台", "深夜故事会",
     };
     lv_obj_t *list = lv_list_create(parent);
     lv_obj_set_flex_grow(list, 1);
@@ -280,8 +275,8 @@ static void build_radio(lv_obj_t *parent)
     lv_obj_set_style_border_opa(list, LV_OPA_TRANSP, 0);
     lv_obj_set_style_pad_all(list, 0, 0);
     for (int i = 0; i < 8; i++) {
-        lv_obj_t *item = lv_list_add_btn(list, LV_SYMBOL_AUDIO, stations[i][0]);
-        lv_obj_t *lbl = lv_obj_get_child(item, 1);
+        lv_obj_t *item = lv_list_add_button(list, LV_SYMBOL_AUDIO, stations[i]);
+        lv_obj_t *lbl = lv_obj_get_child(item, 0);
         lv_obj_set_style_text_font(lbl, &font_cn_16, 0);
         lv_obj_set_style_bg_opa(item, LV_OPA_TRANSP, 0);
         lv_obj_set_style_border_color(item, C_BORDER, 0);
@@ -354,7 +349,7 @@ static void nav_handler(lv_event_t *e)
 {
     lv_obj_t *btn = lv_event_get_target(e);
     lv_obj_t *tv = (lv_obj_t *)lv_event_get_user_data(e);
-    int tab = (int)lv_obj_get_user_data(btn);
+    int tab = (int)(intptr_t)lv_obj_get_user_data(btn);
     lv_tabview_set_act(tv, tab, LV_ANIM_ON);
 }
 
@@ -363,8 +358,8 @@ void ui_init(void)
     lv_obj_t *scr = lv_scr_act();
     lv_obj_set_style_bg_color(scr, C_BG, 0);
 
-    /* Tabview: 去掉默认标签栏, 用自定义底部导航 */
-    lv_obj_t *tv = lv_tabview_create(scr, LV_DIR_TOP, 0);
+    /* Tabview: 去掉默认标签栏, 用自定义底部导航 (LVGL 9: 单参数) */
+    lv_obj_t *tv = lv_tabview_create(scr);
     lv_obj_set_size(tv, LV_PCT(100), LV_PCT(100));
     lv_obj_t *tabs = lv_tabview_get_content(tv);
     lv_obj_set_style_bg_color(tv, C_BG, 0);
