@@ -64,12 +64,12 @@ static void build_player(lv_obj_t *parent)
     lv_obj_set_style_bg_opa(top, LV_OPA_TRANSP, 0);
     lv_obj_set_style_border_opa(top, LV_OPA_TRANSP, 0);
     lv_obj_set_style_pad_all(top, 0, 0);
-    lv_obj_set_style_gap(top, 8, 0);
+    lv_obj_set_style_pad_column(top, 8, 0);
 
     lv_obj_t *cover = lv_obj_create(top);
     lv_obj_set_size(cover, 70, 70);
     lv_obj_set_style_radius(cover, 8, 0);
-    lv_obj_set_style_bg_grad_dir(cover, LV_GRAD_DIR_MAIN, 0);
+    lv_obj_set_style_bg_grad_dir(cover, LV_GRAD_DIR_VER, 0);
     lv_obj_set_style_bg_grad_color(cover, C_ACCENT, 0);
     lv_obj_set_style_bg_color(cover, C_PRIMARY, 0);
     lv_obj_set_style_shadow_color(cover, C_PRIMARY, 0);
@@ -315,7 +315,7 @@ static void build_search(lv_obj_t *parent)
     lv_obj_t *voice = lv_btn_create(box);
     lv_obj_set_size(voice, 30, 30);
     lv_obj_t *v = lv_label_create(voice);
-    lv_label_set_text(v, LV_SYMBOL_MIC);
+    lv_label_set_text(v, LV_SYMBOL_VOLUME_MAX);
     lv_obj_set_style_radius(voice, 15, 0);
     lv_obj_set_style_bg_color(voice, lv_color_hex(0x241f44), 0);
 
@@ -384,7 +384,7 @@ void ui_init(void)
     lv_obj_set_flex_flow(nav, LV_FLEX_FLOW_ROW);
     lv_obj_set_style_pad_all(nav, 0, 0);
 
-    const char *nav_icons[4] = { LV_SYMBOL_AUDIO, LV_SYMBOL_LIST, LV_SYMBOL_WIFI, LV_SYMBOL_SEARCH };
+    const char *nav_icons[4] = { LV_SYMBOL_AUDIO, LV_SYMBOL_LIST, LV_SYMBOL_WIFI, LV_SYMBOL_IMAGE };
     const char *nav_text[4] = { "播放", "歌单", "电台", "搜索" };
     for (int i = 0; i < 4; i++) {
         lv_obj_t *item = lv_obj_create(nav);
