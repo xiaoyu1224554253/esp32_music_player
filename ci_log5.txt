@@ -1,0 +1,324 @@
+﻿PlatformIO firmware	Set up job	﻿2026-08-07T16:03:49.4455687Z Current runner version: '2.336.0'
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4481719Z ##[group]Runner Image Provisioner
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4482860Z Hosted Compute Agent
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4483524Z Version: 20260707.563
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4484176Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4484946Z Build Date: 2026-07-07T19:33:50Z
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4485689Z Worker ID: {95f1866d-fd66-4a6b-ae86-d8639b7f0e60}
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4486424Z Azure Region: westcentralus
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4487029Z ##[endgroup]
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4488531Z ##[group]Operating System
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4489280Z Ubuntu
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4489879Z 24.04.4
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4490418Z LTS
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4490948Z ##[endgroup]
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4491555Z ##[group]Runner Image
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4492346Z Image: ubuntu-24.04
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4492949Z Version: 20260720.247.2
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4494086Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4495893Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4496897Z ##[endgroup]
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4498100Z ##[group]GITHUB_TOKEN Permissions
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4500032Z Contents: read
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4500639Z Metadata: read
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4501316Z Packages: read
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4502089Z ##[endgroup]
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4504193Z Secret source: Actions
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4505249Z Prepare workflow directory
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4895512Z Prepare all required actions
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.4964357Z Getting action download info
+PlatformIO firmware	Set up job	2026-08-07T16:03:49.7908702Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+PlatformIO firmware	Set up job	2026-08-07T16:03:50.3124491Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+PlatformIO firmware	Set up job	2026-08-07T16:03:50.3987659Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+PlatformIO firmware	Set up job	2026-08-07T16:03:50.6177348Z Complete job name: PlatformIO firmware
+PlatformIO firmware	Checkout	﻿2026-08-07T16:03:50.6911197Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6920059Z ##[group]Run actions/checkout@v4
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6920824Z with:
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6921307Z   repository: xiaoyu1224554253/esp32_music_player
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6925514Z   token: ***
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6925944Z   ssh-strict: true
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6926373Z   ssh-user: git
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6926850Z   persist-credentials: true
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6927324Z   clean: true
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6927753Z   sparse-checkout-cone-mode: true
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6928255Z   fetch-depth: 1
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6928673Z   fetch-tags: false
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6929100Z   show-progress: true
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6929552Z   lfs: false
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6929951Z   submodules: false
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6930418Z   set-safe-directory: true
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6930901Z   allow-unsafe-pr-checkout: false
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.6931602Z ##[endgroup]
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.7977858Z Syncing repository: xiaoyu1224554253/esp32_music_player
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.7980507Z ##[group]Getting Git version info
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.7981747Z Working directory is '/home/runner/work/esp32_music_player/esp32_music_player'
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.7983695Z [command]/usr/bin/git version
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8020228Z git version 2.54.0
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8041004Z ##[endgroup]
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8063590Z Temporarily overriding HOME='/home/runner/work/_temp/b68292f5-49a3-49a6-93b4-66536687d968' before making global git config changes
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8073347Z Adding repository directory to the temporary git global config as a safe directory
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8075544Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/esp32_music_player/esp32_music_player
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8114392Z Deleting the contents of '/home/runner/work/esp32_music_player/esp32_music_player'
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8120767Z ##[group]Initializing the repository
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8126072Z [command]/usr/bin/git init /home/runner/work/esp32_music_player/esp32_music_player
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8227476Z hint: Using 'master' as the name for the initial branch. This default branch name
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8228813Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8230133Z hint: to use in all of your new repositories, which will suppress this warning,
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8231099Z hint: call:
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8231720Z hint:
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8232711Z hint: 	git config --global init.defaultBranch <name>
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8233515Z hint:
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8234619Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8236009Z hint: 'development'. The just-created branch can be renamed via this command:
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8236756Z hint:
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8237234Z hint: 	git branch -m <name>
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8237843Z hint:
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8238624Z hint: Disable this message with "git config set advice.defaultBranchName false"
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8239702Z Initialized empty Git repository in /home/runner/work/esp32_music_player/esp32_music_player/.git/
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8245115Z [command]/usr/bin/git remote add origin https://github.com/xiaoyu1224554253/esp32_music_player
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8293361Z ##[endgroup]
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8294348Z ##[group]Disabling automatic garbage collection
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8297237Z [command]/usr/bin/git config --local gc.auto 0
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8329378Z ##[endgroup]
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8330542Z ##[group]Setting up auth
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8337110Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8375368Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8765487Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.8806697Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.9067739Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.9108898Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.9353580Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.9395015Z ##[endgroup]
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.9396146Z ##[group]Fetching the repository
+PlatformIO firmware	Checkout	2026-08-07T16:03:50.9404991Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +cc8e98c728485d4433f8bd190e6f9ab391d4c9cb:refs/remotes/origin/main
+PlatformIO firmware	Checkout	2026-08-07T16:03:51.9813874Z From https://github.com/xiaoyu1224554253/esp32_music_player
+PlatformIO firmware	Checkout	2026-08-07T16:03:51.9815881Z  * [new ref]         cc8e98c728485d4433f8bd190e6f9ab391d4c9cb -> origin/main
+PlatformIO firmware	Checkout	2026-08-07T16:03:51.9848459Z ##[endgroup]
+PlatformIO firmware	Checkout	2026-08-07T16:03:51.9850001Z ##[group]Determining the checkout info
+PlatformIO firmware	Checkout	2026-08-07T16:03:51.9851868Z ##[endgroup]
+PlatformIO firmware	Checkout	2026-08-07T16:03:51.9859146Z [command]/usr/bin/git sparse-checkout disable
+PlatformIO firmware	Checkout	2026-08-07T16:03:51.9912749Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+PlatformIO firmware	Checkout	2026-08-07T16:03:51.9947723Z ##[group]Checking out the ref
+PlatformIO firmware	Checkout	2026-08-07T16:03:51.9952957Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+PlatformIO firmware	Checkout	2026-08-07T16:03:52.0143179Z Switched to a new branch 'main'
+PlatformIO firmware	Checkout	2026-08-07T16:03:52.0167908Z branch 'main' set up to track 'origin/main'.
+PlatformIO firmware	Checkout	2026-08-07T16:03:52.0170671Z ##[endgroup]
+PlatformIO firmware	Checkout	2026-08-07T16:03:52.0232950Z [command]/usr/bin/git log -1 --format=%H
+PlatformIO firmware	Checkout	2026-08-07T16:03:52.0253039Z cc8e98c728485d4433f8bd190e6f9ab391d4c9cb
+PlatformIO firmware	Set up Python	﻿2026-08-07T16:03:52.0542405Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+PlatformIO firmware	Set up Python	2026-08-07T16:03:52.0546586Z ##[group]Run actions/setup-python@v5
+PlatformIO firmware	Set up Python	2026-08-07T16:03:52.0547213Z with:
+PlatformIO firmware	Set up Python	2026-08-07T16:03:52.0547649Z   python-version: 3.11
+PlatformIO firmware	Set up Python	2026-08-07T16:03:52.0548158Z   check-latest: false
+PlatformIO firmware	Set up Python	2026-08-07T16:03:52.0553560Z   token: ***
+PlatformIO firmware	Set up Python	2026-08-07T16:03:52.0554018Z   update-environment: true
+PlatformIO firmware	Set up Python	2026-08-07T16:03:52.0554565Z   allow-prereleases: false
+PlatformIO firmware	Set up Python	2026-08-07T16:03:52.0555113Z   freethreaded: false
+PlatformIO firmware	Set up Python	2026-08-07T16:03:52.0555598Z ##[endgroup]
+PlatformIO firmware	Set up Python	2026-08-07T16:03:52.1862367Z ##[group]Installed versions
+PlatformIO firmware	Set up Python	2026-08-07T16:03:52.1949714Z (node:2368) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+PlatformIO firmware	Set up Python	2026-08-07T16:03:52.1952076Z (Use `node --trace-deprecation ...` to show where the warning was created)
+PlatformIO firmware	Set up Python	2026-08-07T16:03:52.1953580Z Successfully set up CPython (3.11.15)
+PlatformIO firmware	Set up Python	2026-08-07T16:03:52.1954995Z ##[endgroup]
+PlatformIO firmware	Install PlatformIO	﻿2026-08-07T16:03:52.2199756Z ##[group]Run python -m pip install --upgrade pip
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:52.2201121Z ^[[36;1mpython -m pip install --upgrade pip^[[0m
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:52.2202408Z ^[[36;1mpip install platformio^[[0m
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:52.2287206Z shell: /usr/bin/bash -e {0}
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:52.2287879Z env:
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:52.2288460Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:52.2289497Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:52.2290501Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:52.2291385Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:52.2292609Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:52.2293526Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:52.2294284Z ##[endgroup]
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:52.8731617Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (26.1.2)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:53.0093469Z Collecting pip
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:53.1162301Z   Downloading pip-26.2.1-py3-none-any.whl.metadata (4.6 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:53.1393838Z Downloading pip-26.2.1-py3-none-any.whl (1.8 MB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:53.2710358Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 20.9 MB/s  0:00:00
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:53.2984558Z Installing collected packages: pip
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:53.2985626Z   Attempting uninstall: pip
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:53.2999374Z     Found existing installation: pip 26.1.2
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:53.3392365Z     Uninstalling pip-26.1.2:
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:53.3449556Z       Successfully uninstalled pip-26.1.2
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:54.1549806Z Successfully installed pip-26.2.1
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:54.6234516Z Collecting platformio
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:54.7137157Z   Downloading platformio-6.1.19-py3-none-any.whl.metadata (7.2 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:54.7472714Z Collecting bottle==0.13.* (from platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:54.7664592Z   Downloading bottle-0.13.4-py2.py3-none-any.whl.metadata (1.6 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:54.7993467Z Collecting click<8.4,>=8.0.4 (from platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:54.8184923Z   Downloading click-8.3.3-py3-none-any.whl.metadata (2.6 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:54.8480445Z Collecting colorama (from platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:54.8669011Z   Downloading colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:54.9317037Z Collecting marshmallow==3.* (from platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:54.9507506Z   Downloading marshmallow-3.26.2-py3-none-any.whl.metadata (7.3 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:54.9901482Z Collecting pyelftools<1,>=0.27 (from platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.0093940Z   Downloading pyelftools-0.33-py3-none-any.whl.metadata (1.0 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.0348937Z Collecting pyserial==3.5.* (from platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.0539246Z   Downloading pyserial-3.5-py2.py3-none-any.whl.metadata (1.6 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.0909780Z Collecting requests==2.* (from platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.1098901Z   Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.1370620Z Collecting semantic_version==2.10.* (from platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.1566658Z   Downloading semantic_version-2.10.0-py2.py3-none-any.whl.metadata (9.7 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.1860535Z Collecting tabulate==0.* (from platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.2050484Z   Downloading tabulate-0.10.0-py3-none-any.whl.metadata (40 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.2475590Z Collecting ajsonrpc==1.2.* (from platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.2670578Z   Downloading ajsonrpc-1.2.0-py3-none-any.whl.metadata (6.9 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.3060308Z Collecting starlette<0.53,>=0.19 (from platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.3250694Z   Downloading starlette-0.52.1-py3-none-any.whl.metadata (6.3 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.3627195Z Collecting uvicorn<0.41,>=0.16 (from platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.3816203Z   Downloading uvicorn-0.40.0-py3-none-any.whl.metadata (6.7 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.4082369Z Collecting wsproto==1.* (from platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.4271548Z   Downloading wsproto-1.3.2-py3-none-any.whl.metadata (5.2 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.4577186Z Collecting packaging>=17.0 (from marshmallow==3.*->platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.4766151Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.6037339Z Collecting charset_normalizer<4,>=2 (from requests==2.*->platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.6228166Z   Downloading charset_normalizer-3.4.9-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (41 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.6554202Z Collecting idna<4,>=2.5 (from requests==2.*->platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.6742853Z   Downloading idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.7074036Z Collecting urllib3<3,>=1.26 (from requests==2.*->platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.7265592Z   Downloading urllib3-2.7.0-py3-none-any.whl.metadata (6.9 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.7573842Z Collecting certifi>=2023.5.7 (from requests==2.*->platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.7761834Z   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.8080573Z Collecting anyio<5,>=3.6.2 (from starlette<0.53,>=0.19->platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.8276714Z   Downloading anyio-4.14.2-py3-none-any.whl.metadata (4.6 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.8581340Z Collecting typing-extensions>=4.10.0 (from starlette<0.53,>=0.19->platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.8777924Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.9078038Z Collecting h11>=0.8 (from uvicorn<0.41,>=0.16->platformio)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.9270004Z   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:55.9531197Z Downloading platformio-6.1.19-py3-none-any.whl (421 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.0301425Z Downloading ajsonrpc-1.2.0-py3-none-any.whl (22 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.0597890Z Downloading bottle-0.13.4-py2.py3-none-any.whl (103 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.0818498Z Downloading click-8.3.3-py3-none-any.whl (110 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.1042954Z Downloading marshmallow-3.26.2-py3-none-any.whl (50 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.1259327Z Downloading pyelftools-0.33-py3-none-any.whl (201 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.1499492Z Downloading pyserial-3.5-py2.py3-none-any.whl (90 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.1732351Z Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.1942218Z Downloading charset_normalizer-3.4.9-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (221 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.2191544Z Downloading idna-3.18-py3-none-any.whl (65 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.2404406Z Downloading semantic_version-2.10.0-py2.py3-none-any.whl (15 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.2614612Z Downloading starlette-0.52.1-py3-none-any.whl (74 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.2827487Z Downloading anyio-4.14.2-py3-none-any.whl (125 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.3050875Z Downloading tabulate-0.10.0-py3-none-any.whl (39 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.3260215Z Downloading urllib3-2.7.0-py3-none-any.whl (131 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.3481655Z Downloading uvicorn-0.40.0-py3-none-any.whl (68 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.3709908Z Downloading wsproto-1.3.2-py3-none-any.whl (24 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.3916886Z Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.4134839Z Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.4358733Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.4578876Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.4789287Z Downloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:56.5617124Z Installing collected packages: pyserial, bottle, urllib3, typing-extensions, tabulate, semantic_version, pyelftools, packaging, idna, h11, colorama, click, charset_normalizer, certifi, ajsonrpc, wsproto, uvicorn, requests, marshmallow, anyio, starlette, platformio
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:57.7574739Z 
+PlatformIO firmware	Install PlatformIO	2026-08-07T16:03:57.7590631Z Successfully installed ajsonrpc-1.2.0 anyio-4.14.2 bottle-0.13.4 certifi-2026.7.22 charset_normalizer-3.4.9 click-8.3.3 colorama-0.4.6 h11-0.16.0 idna-3.18 marshmallow-3.26.2 packaging-26.3 platformio-6.1.19 pyelftools-0.33 pyserial-3.5 requests-2.34.2 semantic_version-2.10.0 starlette-0.52.1 tabulate-0.10.0 typing-extensions-4.16.0 urllib3-2.7.0 uvicorn-0.40.0 wsproto-1.3.2
+PlatformIO firmware	Build (pio run)	﻿2026-08-07T16:03:57.8365453Z ##[group]Run pio run -e esp32-s3-devkitc-1
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:57.8365826Z ^[[36;1mpio run -e esp32-s3-devkitc-1^[[0m
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:57.8417653Z shell: /usr/bin/bash -e {0}
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:57.8417914Z env:
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:57.8418199Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:57.8418642Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:57.8419061Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:57.8419445Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:57.8419844Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:57.8420217Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:57.8420551Z ##[endgroup]
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:58.1028238Z ********************************************************************************
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:58.1029020Z If you like PlatformIO, please:
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:58.1029710Z - star it on GitHub > https://github.com/platformio/platformio-core
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:58.1030967Z - follow us on LinkedIn to stay up-to-date on the latest project news > https://www.linkedin.com/company/platformio/
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:58.1032393Z - try PlatformIO IDE for embedded development > https://platformio.org/platformio-ide
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:58.1033368Z ********************************************************************************
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:58.1033735Z 
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:58.1142194Z Processing esp32-s3-devkitc-1 (platform: espressif32; board: esp32-s3-devkitc-1; framework: arduino)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:58.1143363Z --------------------------------------------------------------------------------
+PlatformIO firmware	Build (pio run)	2026-08-07T16:03:58.1149755Z Platform Manager: Installing espressif32
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:00.9952692Z Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:01.0894876Z Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:01.1507658Z Platform Manager: espressif32@7.0.1 has been installed!
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:01.1559049Z Tool Manager: Installing espressif/toolchain-xtensa-esp32s3 @ 8.4.0+2021r2-patch5
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:03.7314427Z Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:06.1447096Z Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:06.4557241Z Tool Manager: toolchain-xtensa-esp32s3@8.4.0+2021r2-patch5 has been installed!
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:06.4573905Z Tool Manager: Installing espressif/toolchain-riscv32-esp @ 8.4.0+2021r2-patch5
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:09.7182688Z Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:16.0123361Z Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:16.6208353Z Tool Manager: toolchain-riscv32-esp@8.4.0+2021r2-patch5 has been installed!
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:16.6217256Z Tool Manager: Installing platformio/framework-arduinoespressif32 @ ~3.20017.0
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:19.4169427Z Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:28.3909617Z Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:30.5046053Z Tool Manager: framework-arduinoespressif32@3.20017.241212+sha.dcc1105b has been installed!
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:30.5056877Z Tool Manager: Installing platformio/tool-esptoolpy @ ~2.41100.0
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:32.5585053Z Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:32.6188352Z Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.2647883Z Collecting cryptography~=45.0.3
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.3586970Z   Downloading cryptography-45.0.7-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.3883772Z Collecting ecdsa~=0.19.1
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.4076806Z   Downloading ecdsa-0.19.2-py2.py3-none-any.whl.metadata (29 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.4485482Z Collecting bitstring~=4.3.1
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.4677388Z   Downloading bitstring-4.3.1-py3-none-any.whl.metadata (5.3 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.5009453Z Collecting reedsolo~=1.7.0
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.5205063Z   Downloading reedsolo-1.7.0-py3-none-any.whl.metadata (23 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.5482390Z Collecting intelhex~=2.3.0
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.5673282Z   Downloading intelhex-2.3.0-py2.py3-none-any.whl.metadata (2.7 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.6663135Z Collecting cffi>=1.14 (from cryptography~=45.0.3)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.6857469Z   Downloading cffi-2.1.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.7136236Z Collecting six>=1.9.0 (from ecdsa~=0.19.1)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.7329239Z   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:33.9839590Z Collecting bitarray<4.0,>=3.0.0 (from bitstring~=4.3.1)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.0039867Z   Downloading bitarray-3.10.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (36 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.0359141Z Collecting pycparser (from cffi>=1.14->cryptography~=45.0.3)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.0555731Z   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.0784277Z Downloading cryptography-45.0.7-cp311-abi3-manylinux_2_34_x86_64.whl (4.5 MB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.2392402Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 34.4 MB/s  0:00:00
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.2593783Z Downloading ecdsa-0.19.2-py2.py3-none-any.whl (150 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.2805324Z Downloading bitstring-4.3.1-py3-none-any.whl (71 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.3015570Z Downloading reedsolo-1.7.0-py3-none-any.whl (32 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.3227194Z Downloading intelhex-2.3.0-py2.py3-none-any.whl (50 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.3435794Z Downloading bitarray-3.10.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (369 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.3654785Z Downloading cffi-2.1.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (217 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.3882459Z Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.4093612Z Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.4691734Z Installing collected packages: reedsolo, intelhex, six, pycparser, bitarray, ecdsa, cffi, bitstring, cryptography
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.5861490Z 
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.5872334Z Successfully installed bitarray-3.10.1 bitstring-4.3.1 cffi-2.1.1 cryptography-45.0.7 ecdsa-0.19.2 intelhex-2.3.0 pycparser-3.0 reedsolo-1.7.0 six-1.17.0
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.6586278Z Tool Manager: tool-esptoolpy@2.41100.0 has been installed!
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:34.6623758Z Tool Manager: Installing platformio/tool-scons @ ~4.40801.0
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:36.6554102Z Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:36.7180749Z Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:36.7443365Z Tool Manager: tool-scons@4.40801.0 has been installed!
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.2074936Z Verbose mode can be enabled via `-v, --verbose` option
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.2186371Z CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32-s3-devkitc-1.html
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.2187110Z PLATFORM: Espressif 32 (7.0.1) > Espressif ESP32-S3-DevKitC-1-N8 (8 MB QD, No PSRAM)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.2193550Z HARDWARE: ESP32S3 240MHz, 320KB RAM, 8MB Flash
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.2194868Z DEBUG: Current (esp-builtin) On-board (esp-builtin) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.2195835Z PACKAGES: 
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.2196314Z  - framework-arduinoespressif32 @ 3.20017.241212+sha.dcc1105b 
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.2196888Z  - tool-esptoolpy @ 2.41100.0 (4.11.0) 
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.2197443Z  - toolchain-riscv32-esp @ 8.4.0+2021r2-patch5 
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.2198035Z  - toolchain-xtensa-esp32s3 @ 8.4.0+2021r2-patch5
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.2421323Z LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.2422252Z LDF Modes: Finder ~ chain, Compatibility ~ soft
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.3145608Z Found 33 compatible libraries
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.3145981Z Scanning dependencies...
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.3187652Z No dependencies
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.3197102Z Error: Nothing to build. Please put your source code files to the '/home/runner/work/esp32_music_player/esp32_music_player/src' folder
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.3661778Z ========================= [FAILED] Took 39.25 seconds =========================
+PlatformIO firmware	Build (pio run)	2026-08-07T16:04:37.3995714Z ##[error]Process completed with exit code 1.
+PlatformIO firmware	Post Checkout	﻿2026-08-07T16:04:37.4143759Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+PlatformIO firmware	Post Checkout	2026-08-07T16:04:37.4144995Z Post job cleanup.
+PlatformIO firmware	Post Checkout	2026-08-07T16:04:37.4996875Z [command]/usr/bin/git version
+PlatformIO firmware	Post Checkout	2026-08-07T16:04:37.5041575Z git version 2.54.0
+PlatformIO firmware	Post Checkout	2026-08-07T16:04:37.5076521Z Temporarily overriding HOME='/home/runner/work/_temp/1f499060-3737-4001-8651-849de277faea' before making global git config changes
+PlatformIO firmware	Post Checkout	2026-08-07T16:04:37.5077916Z Adding repository directory to the temporary git global config as a safe directory
+PlatformIO firmware	Post Checkout	2026-08-07T16:04:37.5081290Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/esp32_music_player/esp32_music_player
+PlatformIO firmware	Post Checkout	2026-08-07T16:04:37.5141079Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+PlatformIO firmware	Post Checkout	2026-08-07T16:04:37.5158305Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+PlatformIO firmware	Post Checkout	2026-08-07T16:04:37.5460538Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+PlatformIO firmware	Post Checkout	2026-08-07T16:04:37.5491671Z http.https://github.com/.extraheader
+PlatformIO firmware	Post Checkout	2026-08-07T16:04:37.5502917Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+PlatformIO firmware	Post Checkout	2026-08-07T16:04:37.5538883Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+PlatformIO firmware	Post Checkout	2026-08-07T16:04:37.5826260Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+PlatformIO firmware	Post Checkout	2026-08-07T16:04:37.5869648Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+PlatformIO firmware	Complete job	﻿2026-08-07T16:04:37.6284212Z Cleaning up orphan processes
+PlatformIO firmware	Complete job	2026-08-07T16:04:37.6617689Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

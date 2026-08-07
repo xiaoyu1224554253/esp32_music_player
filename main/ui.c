@@ -170,7 +170,7 @@ static void build_player(lv_obj_t *parent)
     lv_obj_set_flex_flow(ctrls, LV_FLEX_FLOW_ROW);
     lv_obj_set_flex_align(ctrls, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
     lv_obj_set_style_pad_all(ctrls, 0, 0);
-    lv_obj_set_style_gap(ctrls, 16, 0);
+    lv_obj_set_style_pad_column(ctrls, 16, 0);
 
     lv_obj_t *prev = lv_btn_create(ctrls);
     lv_obj_set_size(prev, 34, 34);
@@ -186,7 +186,7 @@ static void build_player(lv_obj_t *parent)
     lv_label_set_text(play_l, LV_SYMBOL_PLAY);
     lv_obj_set_style_text_font(play_l, &font_cn_22, 0);
     lv_obj_set_style_radius(play_btn, 19, 0);
-    lv_obj_set_style_bg_grad_dir(play_btn, LV_GRAD_DIR_MAIN, 0);
+    lv_obj_set_style_bg_grad_dir(play_btn, LV_GRAD_DIR_VER, 0);
     lv_obj_set_style_bg_grad_color(play_btn, C_ACCENT, 0);
     lv_obj_set_style_bg_color(play_btn, C_PRIMARY, 0);
 
@@ -302,7 +302,7 @@ static void build_search(lv_obj_t *parent)
     lv_obj_set_style_border_opa(box, LV_OPA_TRANSP, 0);
     lv_obj_set_flex_flow(box, LV_FLEX_FLOW_ROW);
     lv_obj_set_style_pad_all(box, 0, 0);
-    lv_obj_set_style_gap(box, 6, 0);
+    lv_obj_set_style_pad_row(box, 6, 0);
 
     lv_obj_t *input = lv_textarea_create(box);
     lv_obj_set_flex_grow(input, 1);
@@ -330,7 +330,7 @@ static void build_search(lv_obj_t *parent)
     lv_obj_set_style_border_opa(tags, LV_OPA_TRANSP, 0);
     lv_obj_set_flex_flow(tags, LV_FLEX_FLOW_ROW_WRAP);
     lv_obj_set_style_pad_all(tags, 0, 0);
-    lv_obj_set_style_gap(tags, 5, 0);
+    lv_obj_set_style_pad_column(tags, 5, 0);
     const char *hist[] = { "周杰伦", "林俊杰", "陈奕迅", "夜曲" };
     for (int i = 0; i < 4; i++) {
         lv_obj_t *t = lv_btn_create(tags);
@@ -393,7 +393,7 @@ void ui_init(void)
         lv_obj_set_style_border_opa(item, LV_OPA_TRANSP, 0);
         lv_obj_set_flex_flow(item, LV_FLEX_FLOW_ROW);
         lv_obj_set_flex_align(item, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-        lv_obj_set_style_gap(item, 4, 0);
+        lv_obj_set_style_pad_column(item, 4, 0);
         lv_obj_set_user_data(item, (void *)(intptr_t)i);
         lv_obj_t *ic = lv_label_create(item);
         lv_label_set_text(ic, nav_icons[i]);

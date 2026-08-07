@@ -72,7 +72,7 @@ esp_err_t disp_driver_init(void)
 }
 
 /* LVGL 9 flush 回调 */
-void disp_driver_flush(lv_display_t *disp, const lv_area_t *area, lv_color_t *color_p)
+void disp_driver_flush(lv_display_t *disp, const lv_area_t *area, uint8_t *color_p)
 {
     int x1 = area->x1, y1 = area->y1, x2 = area->x2, y2 = area->y2;
     esp_lcd_panel_draw_bitmap(panel_handle, x1, y1, x2 + 1, y2 + 1, color_p);

@@ -4,6 +4,7 @@
 #include "freertos/task.h"
 #include "lvgl.h"
 #include "esp_timer.h"
+#include "board.h"
 #include "disp_driver.h"
 #include "tp_driver.h"
 #include "ui.h"
@@ -41,8 +42,8 @@ void app_main(void)
 
     lv_display_t *disp = lv_display_create(LCD_H_RES, LCD_V_RES);
     lv_display_set_flush_cb(disp, disp_driver_flush);
-    lv_display_set_draw_buffers(disp, buf1, buf2, sizeof(buf1),
-                                 LV_DISPLAY_RENDER_MODE_PARTIAL);
+    lv_display_set_buffers(disp, buf1, buf2, sizeof(buf1));
+    lv_display_set_render_mode(disp, LV_DISPLAY_RENDER_MODE_PARTIAL);
 
     lv_indev_t *indev = lv_indev_create();
     lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER);
