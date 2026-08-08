@@ -38,9 +38,9 @@ static int lyric_idx = 2;
 static int cur_song = 0;
 static bool playing = false;
 
-/* 字体 (全中文字库, 在 ui_fonts.c 中定义) */
-LV_FONT_DECLARE(font_cn_16);
-LV_FONT_DECLARE(font_cn_22);
+/* 字体 (全中文字库, 在 ui_fonts.c 中定义; 回退时为指向内置默认字体的指针) */
+extern const lv_font_t *font_cn_16;
+extern const lv_font_t *font_cn_22;
 
 /* ===== 控件引用 ===== */
 static lv_obj_t *lbl_song, *lbl_artist, *lbl_album, *lbl_time_end;
@@ -77,7 +77,7 @@ static void build_player(lv_obj_t *parent)
     lv_obj_set_style_shadow_width(cover, 12, 0);
     lv_obj_t *cover_sym = lv_label_create(cover);
     lv_label_set_text(cover_sym, LV_SYMBOL_AUDIO);
-    lv_obj_set_style_text_font(cover_sym, &font_cn_22, 0);
+    lv_obj_set_style_text_font(cover_sym, font_cn_22, 0);
     lv_obj_center(cover_sym);
 
     lv_obj_t *info = lv_obj_create(top);
@@ -90,22 +90,22 @@ static void build_player(lv_obj_t *parent)
 
     lbl_song = lv_label_create(info);
     lv_label_set_text(lbl_song, playlist[cur_song].name);
-    lv_obj_set_style_text_font(lbl_song, &font_cn_16, 0);
+    lv_obj_set_style_text_font(lbl_song, font_cn_16, 0);
     lv_obj_set_style_text_color(lbl_song, C_TEXT, 0);
 
     lbl_artist = lv_label_create(info);
     lv_label_set_text(lbl_artist, playlist[cur_song].artist);
-    lv_obj_set_style_text_font(lbl_artist, &font_cn_16, 0);
+    lv_obj_set_style_text_font(lbl_artist, font_cn_16, 0);
     lv_obj_set_style_text_color(lbl_artist, C_TEXT2, 0);
 
     lbl_album = lv_label_create(info);
     lv_label_set_text(lbl_album, playlist[cur_song].album);
-    lv_obj_set_style_text_font(lbl_album, &font_cn_16, 0);
+    lv_obj_set_style_text_font(lbl_album, font_cn_16, 0);
     lv_obj_set_style_text_color(lbl_album, C_TEXTM, 0);
 
     lbl_source_badge = lv_label_create(info);
     lv_label_set_text(lbl_source_badge, "🌐 网络搜索");
-    lv_obj_set_style_text_font(lbl_source_badge, &font_cn_16, 0);
+    lv_obj_set_style_text_font(lbl_source_badge, font_cn_16, 0);
     lv_obj_set_style_text_color(lbl_source_badge, C_PRIMARY, 0);
     lv_obj_set_style_bg_color(lbl_source_badge, lv_color_hex(0x1f1b3a), 0);
     lv_obj_set_style_bg_opa(lbl_source_badge, 255, 0);
@@ -124,7 +124,7 @@ static void build_player(lv_obj_t *parent)
     lv_obj_center(lybox);
     lbl_lyric = lv_label_create(lybox);
     lv_label_set_text(lbl_lyric, lyrics[lyric_idx]);
-    lv_obj_set_style_text_font(lbl_lyric, &font_cn_16, 0);
+    lv_obj_set_style_text_font(lbl_lyric, font_cn_16, 0);
     lv_obj_set_style_text_color(lbl_lyric, C_TEXT, 0);
     lv_obj_set_style_text_align(lbl_lyric, LV_TEXT_ALIGN_CENTER, 0);
     lv_obj_center(lbl_lyric);
@@ -145,13 +145,13 @@ static void build_player(lv_obj_t *parent)
     lv_obj_set_style_pad_all(timerow, 0, 0);
     lv_obj_t *t1 = lv_label_create(timerow);
     lv_label_set_text(t1, "01:24");
-    lv_obj_set_style_text_font(t1, &font_cn_16, 0);
+    lv_obj_set_style_text_font(t1, font_cn_16, 0);
     lv_obj_set_style_text_color(t1, C_TEXTM, 0);
     lbl_time_end = lv_label_create(timerow);
     lv_label_set_text(lbl_time_end, playlist[cur_song].time);
     lv_obj_set_flex_grow(lbl_time_end, 1);
     lv_obj_set_style_text_align(lbl_time_end, LV_TEXT_ALIGN_RIGHT, 0);
-    lv_obj_set_style_text_font(lbl_time_end, &font_cn_16, 0);
+    lv_obj_set_style_text_font(lbl_time_end, font_cn_16, 0);
     lv_obj_set_style_text_color(lbl_time_end, C_TEXTM, 0);
 
     lv_obj_t *bar = lv_bar_create(prog);
@@ -176,7 +176,7 @@ static void build_player(lv_obj_t *parent)
     lv_obj_set_size(prev, 34, 34);
     lv_obj_t *prev_l = lv_label_create(prev);
     lv_label_set_text(prev_l, LV_SYMBOL_PREV);
-    lv_obj_set_style_text_font(prev_l, &font_cn_22, 0);
+    lv_obj_set_style_text_font(prev_l, font_cn_22, 0);
     lv_obj_set_style_radius(prev, 17, 0);
     lv_obj_set_style_bg_color(prev, lv_color_hex(0x1a1a28), 0);
 
@@ -184,7 +184,7 @@ static void build_player(lv_obj_t *parent)
     lv_obj_set_size(play_btn, 38, 38);
     lv_obj_t *play_l = lv_label_create(play_btn);
     lv_label_set_text(play_l, LV_SYMBOL_PLAY);
-    lv_obj_set_style_text_font(play_l, &font_cn_22, 0);
+    lv_obj_set_style_text_font(play_l, font_cn_22, 0);
     lv_obj_set_style_radius(play_btn, 19, 0);
     lv_obj_set_style_bg_grad_dir(play_btn, LV_GRAD_DIR_VER, 0);
     lv_obj_set_style_bg_grad_color(play_btn, C_ACCENT, 0);
@@ -194,7 +194,7 @@ static void build_player(lv_obj_t *parent)
     lv_obj_set_size(next, 34, 34);
     lv_obj_t *next_l = lv_label_create(next);
     lv_label_set_text(next_l, LV_SYMBOL_NEXT);
-    lv_obj_set_style_text_font(next_l, &font_cn_22, 0);
+    lv_obj_set_style_text_font(next_l, font_cn_22, 0);
     lv_obj_set_style_radius(next, 17, 0);
     lv_obj_set_style_bg_color(next, lv_color_hex(0x1a1a28), 0);
 }
@@ -213,13 +213,13 @@ static void build_playlist(lv_obj_t *parent)
     lv_obj_set_style_pad_all(hdr, 0, 0);
     lv_obj_t *h = lv_label_create(hdr);
     lv_label_set_text(h, "我的歌单");
-    lv_obj_set_style_text_font(h, &font_cn_16, 0);
+    lv_obj_set_style_text_font(h, font_cn_16, 0);
     lv_obj_set_style_text_color(h, lv_color_hex(0xe0e0ff), 0);
     lv_obj_t *c = lv_label_create(hdr);
     lv_obj_set_flex_grow(c, 1);
     lv_label_set_text(c, "SD 卡 · 12 首");
     lv_obj_set_style_text_align(c, LV_TEXT_ALIGN_RIGHT, 0);
-    lv_obj_set_style_text_font(c, &font_cn_16, 0);
+    lv_obj_set_style_text_font(c, font_cn_16, 0);
     lv_obj_set_style_text_color(c, C_TEXTM, 0);
 
     lv_obj_t *list = lv_list_create(parent);
@@ -233,7 +233,7 @@ static void build_playlist(lv_obj_t *parent)
         /* LVGL 9: lv_list_add_button 返回 lv_button, label 是其首个 child */
         lv_obj_t *item = lv_list_add_button(list, NULL, playlist[i].name);
         lbl_playlist_items[i] = lv_obj_get_child(item, 0);
-        lv_obj_set_style_text_font(lbl_playlist_items[i], &font_cn_16, 0);
+        lv_obj_set_style_text_font(lbl_playlist_items[i], font_cn_16, 0);
         lv_obj_set_style_bg_opa(item, LV_OPA_TRANSP, 0);
         lv_obj_set_style_border_color(item, C_BORDER, 0);
         lv_obj_set_style_border_width(item, 1, 0);
@@ -255,13 +255,13 @@ static void build_radio(lv_obj_t *parent)
     lv_obj_set_style_pad_all(hdr, 0, 0);
     lv_obj_t *h = lv_label_create(hdr);
     lv_label_set_text(h, "电台");
-    lv_obj_set_style_text_font(h, &font_cn_16, 0);
+    lv_obj_set_style_text_font(h, font_cn_16, 0);
     lv_obj_set_style_text_color(h, lv_color_hex(0xe0e0ff), 0);
     lv_obj_t *c = lv_label_create(hdr);
     lv_obj_set_flex_grow(c, 1);
     lv_label_set_text(c, "8 个频道在线");
     lv_obj_set_style_text_align(c, LV_TEXT_ALIGN_RIGHT, 0);
-    lv_obj_set_style_text_font(c, &font_cn_16, 0);
+    lv_obj_set_style_text_font(c, font_cn_16, 0);
     lv_obj_set_style_text_color(c, C_TEXTM, 0);
 
     const char *stations[8] = {
@@ -277,7 +277,7 @@ static void build_radio(lv_obj_t *parent)
     for (int i = 0; i < 8; i++) {
         lv_obj_t *item = lv_list_add_button(list, LV_SYMBOL_AUDIO, stations[i]);
         lv_obj_t *lbl = lv_obj_get_child(item, 0);
-        lv_obj_set_style_text_font(lbl, &font_cn_16, 0);
+        lv_obj_set_style_text_font(lbl, font_cn_16, 0);
         lv_obj_set_style_bg_opa(item, LV_OPA_TRANSP, 0);
         lv_obj_set_style_border_color(item, C_BORDER, 0);
         lv_obj_set_style_border_width(item, 1, 0);
@@ -293,7 +293,7 @@ static void build_search(lv_obj_t *parent)
 
     lv_obj_t *title = lv_label_create(parent);
     lv_label_set_text(title, "搜索");
-    lv_obj_set_style_text_font(title, &font_cn_16, 0);
+    lv_obj_set_style_text_font(title, font_cn_16, 0);
     lv_obj_set_style_text_color(title, lv_color_hex(0xe0e0ff), 0);
 
     lv_obj_t *box = lv_obj_create(parent);
@@ -308,7 +308,7 @@ static void build_search(lv_obj_t *parent)
     lv_obj_set_flex_grow(input, 1);
     lv_obj_set_height(input, 30);
     lv_textarea_set_placeholder_text(input, "搜索歌曲、歌手、专辑...");
-    lv_obj_set_style_text_font(input, &font_cn_16, 0);
+    lv_obj_set_style_text_font(input, font_cn_16, 0);
     lv_obj_set_style_bg_color(input, lv_color_hex(0x1a1a28), 0);
     lv_obj_set_style_radius(input, 15, 0);
 
@@ -321,7 +321,7 @@ static void build_search(lv_obj_t *parent)
 
     lv_obj_t *hist_title = lv_label_create(parent);
     lv_label_set_text(hist_title, "搜索历史");
-    lv_obj_set_style_text_font(hist_title, &font_cn_16, 0);
+    lv_obj_set_style_text_font(hist_title, font_cn_16, 0);
     lv_obj_set_style_text_color(hist_title, C_TEXTM, 0);
 
     lv_obj_t *tags = lv_obj_create(parent);
@@ -337,7 +337,7 @@ static void build_search(lv_obj_t *parent)
         lv_obj_set_height(t, 24);
         lv_obj_t *tl = lv_label_create(t);
         lv_label_set_text(tl, hist[i]);
-        lv_obj_set_style_text_font(tl, &font_cn_16, 0);
+        lv_obj_set_style_text_font(tl, font_cn_16, 0);
         lv_obj_set_style_text_color(tl, C_TEXT2, 0);
         lv_obj_set_style_bg_color(t, lv_color_hex(0x1a1a28), 0);
         lv_obj_set_style_radius(t, 10, 0);
@@ -399,7 +399,7 @@ void ui_init(void)
         lv_label_set_text(ic, nav_icons[i]);
         lv_obj_t *tx = lv_label_create(item);
         lv_label_set_text(tx, nav_text[i]);
-        lv_obj_set_style_text_font(tx, &font_cn_16, 0);
+        lv_obj_set_style_text_font(tx, font_cn_16, 0);
         lv_obj_add_event_cb(item, nav_handler, LV_EVENT_CLICKED, tv);
     }
 }
