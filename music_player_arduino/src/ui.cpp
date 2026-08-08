@@ -22,16 +22,15 @@ static const uint16_t ICON_COLORS[4] = {
     rgb(124, 108, 255),  // 紫
     rgb(168, 85, 247),   // 玫紫
     rgb(236, 72, 153),   // 粉
-    rgb(59, 130, 246)    // 蓝
+    rgb(0, 200, 255)     // 青蓝
 };
 
-static inline uint16_t blend(uint16_t a, uint16_t b, uint8_t f) {
-    // 简单线性插值，f=0..255
-    uint8_t ar = (a >> 11) << 3, ag = ((a >> 5) & 0x3F) << 2, ab = (a & 0x1F) << 3;
-    uint8_t br = (b >> 11) << 3, bg = ((b >> 5) & 0x3F) << 2, bb = (b & 0x1F) << 3;
-    uint8_t r = (ar * (255 - f) + br * f) >> 8;
-    uint8_t g = (ag * (255 - f) + bg * f) >> 8;
-    uint8_t b = (ab * (255 - f) + bb * f) >> 8;
+static inline uint16_t blend(uint16_t c1, uint16_t c2, uint8_t f) {
+    uint8_t r1 = (c1 >> 11) << 3, g1 = ((c1 >> 5) & 0x3F) << 2, b1 = (c1 & 0x1F) << 3;
+    uint8_t r2 = (c2 >> 11) << 3, g2 = ((c2 >> 5) & 0x3F) << 2, b2 = (c2 & 0x1F) << 3;
+    uint8_t r = (r1 * (255 - f) + r2 * f) >> 8;
+    uint8_t g = (g1 * (255 - f) + g2 * f) >> 8;
+    uint8_t b = (b1 * (255 - f) + b2 * f) >> 8;
     return rgb(r, g, b);
 }
 
@@ -460,7 +459,7 @@ void UI::drawRadioTab() {
     const char* radios[2] = {"华语流行 FM", "古典音乐厅"};
     const char* descs[2] = {"热门金曲 24h 不停歇", "古典音乐不间断"};
     const char* freqs[2] = {"FM 88.7", "FM 92.1"};
-    uint16_t colors[2] = {C_ACCENT, C_BLUE};
+    uint16_t colors[2] = {C_ACCENT, C_ONLINE};
     for (int i = 0; i < 2; i++) {
         int row_y = list_y + i * 36;
         int ico_x = x + 10, ico_y = row_y + 4, ico_sz = 28;
