@@ -24,7 +24,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install platformio
 
-      - name: Build (pio run)
+      - name: Build (pio run) — Arduino music player
+        working-directory: music_player_arduino
         run: pio run -e esp32-s3-devkitc-1
 
       - name: Upload firmware artifacts
@@ -32,7 +33,7 @@ jobs:
         with:
           name: platformio-firmware
           path: |
-            .pio/build/*/firmware.bin
-            .pio/build/*/partitions.bin
-            .pio/build/*/bootloader.bin
+            music_player_arduino/.pio/build/*/firmware.bin
+            music_player_arduino/.pio/build/*/partitions.bin
+            music_player_arduino/.pio/build/*/bootloader.bin
           if-no-files-found: warn
