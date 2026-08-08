@@ -17,8 +17,32 @@ static const char *TAG = "ft6336";
 #define REG_P1_YH       0x05
 #define REG_GEST_ID     0x01
 
-static uint16_t map_x(uint16_t raw) { return (raw * LCD_H_RES) / 320; }
-static uint16_t map_y(uint16_t raw) { return (raw * LCD_V_RES) / 320; }
+/*
+ * 触摸坐标与屏幕逻辑坐标的对应关系
+ * 屏幕已做 swap_xy=true (裸屏 240x320 -> 逻辑 320x240)。
+ * FT6336 控制器输出的 x 沿玻璃长边(0~320)、y 沿短边(0~240)，
+ * 与逻辑坐标轴向一致，故默认 1:1 映射，无需 swap。
+ * 若现场发现触摸左右/上下翻转，把对应宏改为 1 即可。
+ */
+#define TOUCH_SWAP_XY   0
+#define TOUCH_MIRROR_X  0
+#define TOUCH_MIRROR_Y  0
+
+static void tp_map(uint16_t raw_x, uint16_t raw_y, int *out_x, int *out_y)
+{
+    uint16_t x = raw_x, y = raw_y;
+#if TOUCH_SWAP_XY
+    uint16_t t = x; x = y; y = t;
+#endif
+#if TOUCH_MIRROR_X
+    x = LCD_H_RES - 1 - x;
+#endif
+#if TOUCH_MIRROR_Y
+    y = LCD_V_RES - 1 - y;
+#endif
+    *out_x = x;
+    *out_y = y;
+}
 
 static esp_err_t tp_write_reg(uint8_t reg, uint8_t val)
 {
@@ -88,7 +112,6 @@ void tp_driver_read(lv_indev_t *indev, lv_indev_data_t *data)
     tp_read_reg(REG_P1_YH + 1, &yl, 1);
     uint16_t x = ((xh & 0x0F) << 8) | xl;
     uint16_t y = ((yh & 0x0F) << 8) | yl;
-    data->point.x = map_x(x);
-    data->point.y = map_y(y);
+    tp_map(x, y, &data->point.x, &data->point.y);
     data->state = LV_INDEV_STATE_PRESSED;
 }
