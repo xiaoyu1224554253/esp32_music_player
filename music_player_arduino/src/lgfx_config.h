@@ -12,8 +12,8 @@ public:
             auto cfg = _bus_instance.config();
             cfg.spi_host = SPI2_HOST;
             cfg.spi_mode = 0;
-            cfg.freq_write = 10000000;
-            cfg.freq_read  = 8000000;
+            cfg.freq_write = 8000000;
+            cfg.freq_read  = 6000000;
             cfg.pin_sclk = PIN_LCD_SCK;
             cfg.pin_mosi = PIN_LCD_MOSI;
             cfg.pin_miso = PIN_LCD_MISO;
@@ -26,8 +26,8 @@ public:
             cfg.pin_cs   = PIN_LCD_CS;
             cfg.pin_rst  = PIN_LCD_RST;
             cfg.pin_busy = -1;
-            cfg.panel_width  = 240;
-            cfg.panel_height = 320;
+            cfg.panel_width  = 320;
+            cfg.panel_height = 240;
             cfg.offset_x = 0;
             cfg.offset_y = 0;
             cfg.offset_rotation = 0;
