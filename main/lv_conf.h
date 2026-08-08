@@ -20,30 +20,29 @@
 
 /* 默认字体: 留给 LVGL 组件默认 (内置 lv_font_default); 中文由 ui_fonts.c 的 font_cn_16 覆盖 */
 
-/* 启用需要的核心 widget (LVGL 9 命名) */
-#define LV_USE_LVGL 1
+/* 启用需要的核心 widget (LVGL 9 命名: 前缀 LVGL_USE_, 原 LV_USE_ 在 v9 无效) */
 #define LV_USE_LOG 0
-#define LV_USE_LABEL 1
-#define LV_USE_BTN 1
-#define LV_USE_LIST 1
-#define LV_USE_TEXTAREA 1
-#define LV_USE_BAR 1
-#define LV_USE_TABVIEW 1
-#define LV_USE_OBJ 1
-#define LV_USE_IMG 0
-#define LV_USE_ARC 0
-#define LV_USE_SLIDER 0
-#define LV_USE_SWITCH 0
-#define LV_USE_CHECKBOX 0
-#define LV_USE_DROPDOWN 0
-#define LV_USE_ROLLER 0
-#define LV_USE_TABLE 0
-#define LV_USE_CHART 0
-#define LV_USE_CALENDAR 0
-#define LV_USE_SPINNER 0
-#define LV_USE_SPINBOX 0
-#define LV_USE_KEYBOARD 0
-#define LV_USE_MSGBOX 0
+#define LVGL_USE_OBJ 1
+#define LVGL_USE_LABEL 1
+#define LVGL_USE_BTN 1
+#define LVGL_USE_LIST 1
+#define LVGL_USE_TEXTAREA 1
+#define LVGL_USE_BAR 1
+#define LVGL_USE_TABVIEW 1
+#define LVGL_USE_IMG 0
+#define LVGL_USE_ARC 0
+#define LVGL_USE_SLIDER 0
+#define LVGL_USE_SWITCH 0
+#define LVGL_USE_CHECKBOX 0
+#define LVGL_USE_DROPDOWN 0
+#define LVGL_USE_ROLLER 0
+#define LVGL_USE_TABLE 0
+#define LVGL_USE_CHART 0
+#define LVGL_USE_CALENDAR 0
+#define LVGL_USE_SPINNER 0
+#define LVGL_USE_SPINBOX 0
+#define LVGL_USE_KEYBOARD 0
+#define LVGL_USE_MSGBOX 0
 
 /* 文本/字体 */
 #define LV_TXT_ENC LV_TXT_ENC_UTF8
