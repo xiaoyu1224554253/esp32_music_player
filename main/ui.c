@@ -41,7 +41,6 @@ static const char *lyrics[] = {
 };
 static int lyric_idx = 2;
 static int cur_song = 0;
-static bool playing = false;
 
 /* 电台 */
 typedef struct { const char *name, *desc, *freq, *icon, *cls; } station_t;
@@ -487,8 +486,6 @@ static void build_search(lv_obj_t *parent)
     lv_obj_set_flex_flow(parent, LV_FLEX_FLOW_COLUMN);
     lv_obj_set_style_pad_all(parent, 6, 0);
 
-    lv_obj_t *title = add_label(parent, "搜索", font_cn_16, C_TITLE, LV_TEXT_ALIGN_LEFT);
-
     lv_obj_t *box = lv_obj_create(parent);
     lv_obj_set_size(box, LV_PCT(100), LV_SIZE_CONTENT);
     lv_obj_set_style_bg_opa(box, LV_OPA_TRANSP, 0);
@@ -523,11 +520,10 @@ static void build_search(lv_obj_t *parent)
     lv_obj_set_style_pad_all(status, 4, 0);
     lv_obj_set_style_pad_column(status, 6, 0);
     lv_obj_t *spin = lv_spinner_create(status);
-    lv_spinner_set_spin_time(spin, 1000);
+    lv_spinner_set_anim_params(spin, 1000, 60);
     lv_obj_set_size(spin, 11, 11);
     lv_obj_set_style_arc_color(spin, C_PRIMARY, LV_PART_INDICATOR);
     lv_obj_set_style_arc_width(spin, 2, 0);
-    lv_obj_set_style_arc_length(spin, 60, LV_PART_INDICATOR);
     add_label(status, "搜索中...", font_cn_16, C_PRIMARY, LV_TEXT_ALIGN_LEFT);
 
     /* 搜索结果区 */
@@ -639,7 +635,6 @@ void ui_init(void)
     tabview = lv_tabview_create(scr);
     lv_obj_set_flex_grow(tabview, 1);
     lv_obj_set_width(tabview, LV_PCT(100));
-    lv_obj_t *tabs = lv_tabview_get_content(tabview);
     lv_obj_set_style_bg_color(tabview, C_BG, 0);
 
     lv_obj_t *t_player   = lv_tabview_add_tab(tabview, "player");
