@@ -28,7 +28,7 @@ static const char *TAG = "ft6336";
 #define TOUCH_MIRROR_X  0
 #define TOUCH_MIRROR_Y  0
 
-static void tp_map(uint16_t raw_x, uint16_t raw_y, int *out_x, int *out_y)
+static void tp_map(uint16_t raw_x, uint16_t raw_y, lv_coord_t *out_x, lv_coord_t *out_y)
 {
     uint16_t x = raw_x, y = raw_y;
 #if TOUCH_SWAP_XY
