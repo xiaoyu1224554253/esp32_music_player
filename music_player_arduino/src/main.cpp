@@ -44,6 +44,9 @@ void loop() {
     uint16_t tx = 0, ty = 0;
     bool pressed = lcd.getTouch(&tx, &ty);
     if (pressed) {
+        // 触摸原始坐标 X/Y 轴方向均与显示相反（rotation=1），手动翻转对齐
+        tx = lcd.width()  - 1 - tx;
+        ty = lcd.height() - 1 - ty;
         Serial.printf("touch -> %d,%d\n", tx, ty);
         ui.onTouch(tx, ty, true);
         was_pressed = true;
