@@ -57,6 +57,11 @@
 #define LV_TICK_CUSTOM 1
 #define LV_TICK_CUSTOM_SYS_TIME_EXPR (lv_tick_get())
 
+/* 内置字体 (回退用, 避免占位字体为全零结构体导致崩溃) */
+#define LVGL_USE_FONT_MONTSERRAT_16 1
+#define LVGL_USE_FONT_MONTSERRAT_22 1
+#define LVGL_USE_FONT_MONTSERRAT_14 1
+
 /* 杂项 */
 #define LV_USE_ASSERT_NULL 0
 #define LV_USE_ASSERT_MALLOC 0

@@ -3,7 +3,6 @@ idf_component_register(
         "main.c"
         "ui.c"
         "ui_fonts.c"
-        "ui_fonts_22.c"
         "disp_driver.c"
         "tp_driver.c"
     INCLUDE_DIRS "."
