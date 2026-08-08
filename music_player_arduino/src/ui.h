@@ -33,8 +33,8 @@ private:
     void drawSearchTab();
 
     void drawRoundedRect(int x, int y, int w, int h, int r, uint16_t c);
-    void drawCenteredText(int x, int y, int w, int h, const char* txt, uint16_t c, const void* font);
-    int16_t textWidth(const char* txt, const void* font);
+    void drawCenteredText(int x, int y, int w, int h, const char* txt, uint16_t c, const lgfx::v1::IFont* font);
+    int16_t textWidth(const char* txt, const lgfx::v1::IFont* font);
     void setCJK();   // 切换中文字体
     void setASC();   // 切换英文字体
     bool hit(int x, int y, int w, int h, uint16_t tx, uint16_t ty);

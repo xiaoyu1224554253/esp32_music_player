@@ -83,12 +83,12 @@ void UI::drawRoundedRect(int x, int y, int w, int h, int r, uint16_t c) {
     _lcd->fillRoundRect(x, y, w, h, r, c);
 }
 
-int16_t UI::textWidth(const char* txt, const void* font) {
+int16_t UI::textWidth(const char* txt, const lgfx::v1::IFont* font) {
     _lcd->setFont(font);
     return _lcd->textWidth(txt);
 }
 
-void UI::drawCenteredText(int x, int y, int w, int h, const char* txt, uint16_t c, const void* font) {
+void UI::drawCenteredText(int x, int y, int w, int h, const char* txt, uint16_t c, const lgfx::v1::IFont* font) {
     _lcd->setFont(font);
     _lcd->setTextColor(c);
     int16_t tw = _lcd->textWidth(txt);
