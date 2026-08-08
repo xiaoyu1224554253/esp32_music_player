@@ -33,7 +33,7 @@
 /* ===== 屏幕参数 ===== */
 #define SCREEN_WIDTH    320
 #define SCREEN_HEIGHT   240
-#define LCD_ROTATION    0   // 面板已按 320x240 横屏配置，无需软件旋转
+#define LCD_ROTATION    1   // 横屏: 0/1 视实际方向调整
 
 /* ===== UI 尺寸 ===== */
 #define UI_STATUS_H     18

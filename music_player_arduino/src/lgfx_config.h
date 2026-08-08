@@ -26,8 +26,8 @@ public:
             cfg.pin_cs   = PIN_LCD_CS;
             cfg.pin_rst  = PIN_LCD_RST;
             cfg.pin_busy = -1;
-            cfg.panel_width  = 320;
-            cfg.panel_height = 240;
+            cfg.panel_width  = 240;
+            cfg.panel_height = 320;
             cfg.offset_x = 0;
             cfg.offset_y = 0;
             cfg.offset_rotation = 0;

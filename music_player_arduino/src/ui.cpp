@@ -296,20 +296,29 @@ void UI::drawPlayerTab() {
     // 控制按钮
     int cy = pb_y + 42;
     int cx = x + w / 2;
-    // 上一首
+    // 上一首：双竖线+箭头
     _lcd->fillCircle(cx - 52, cy, 16, C_SURFACE2);
-    drawCenteredText(cx - 68, cy - 8, 32, 16, "|◀", C_TEXT2, FONT_M);
-    // 播放/暂停
+    _lcd->fillRect(cx - 60, cy - 6, 3, 12, C_TEXT2);
+    _lcd->fillRect(cx - 54, cy - 6, 3, 12, C_TEXT2);
+    _lcd->fillTriangle(cx - 50, cy - 7, cx - 50, cy + 7, cx - 44, cy, C_TEXT2);
+    // 播放/暂停（几何绘制）
     _lcd->fillCircle(cx, cy, 22, C_PRIMARY);
-    drawCenteredText(cx - 22, cy - 22, 44, 44, playing ? "||" : "▶", C_WHITE, FONT_L);
-    // 下一首
+    if (playing) {
+        _lcd->fillRect(cx - 7, cy - 8, 5, 16, C_WHITE);
+        _lcd->fillRect(cx + 2, cy - 8, 5, 16, C_WHITE);
+    } else {
+        _lcd->fillTriangle(cx - 8, cy - 10, cx - 8, cy + 10, cx + 9, cy, C_WHITE);
+    }
+    // 下一首：箭头+双竖线
     _lcd->fillCircle(cx + 52, cy, 16, C_SURFACE2);
-    drawCenteredText(cx + 36, cy - 8, 32, 16, "▶|", C_TEXT2, FONT_M);
+    _lcd->fillTriangle(cx + 44, cy - 7, cx + 44, cy + 7, cx + 50, cy, C_TEXT2);
+    _lcd->fillRect(cx + 54, cy - 6, 3, 12, C_TEXT2);
+    _lcd->fillRect(cx + 60, cy - 6, 3, 12, C_TEXT2);
 }
 
 void UI::handlePlayerTouch(uint16_t x, uint16_t y) {
     int cx = PAGE_X + PAGE_W / 2;
-    int cy = PAGE_Y + 70 + 8 + 34 + 14 + 42; // 与 drawPlayerTab 对齐
+    int cy = PAGE_Y + 70 + 8 + 34 + 14 + 42; // 与 drawPlayerTab 对齐 (≈194)
     // 上一首
     if (hit(cx - 52 - 16, cy - 16, 32, 32, x, y)) {
         cur_song = (cur_song - 1 + playlist_count) % playlist_count;
@@ -367,20 +376,20 @@ void UI::drawPlaylistTab() {
         }
         setCJK();
         if (active) {
-            // 播放三角
-            int tx = x + 14, ty = row_y + 10;
+            // 播放三角，垂直居中于行
+            int tx = x + 13, ty = row_y + 11;
             _lcd->fillTriangle(tx, ty, tx, ty + 10, tx + 7, ty + 5, C_PRIMARY);
         } else {
             _lcd->setFont(FONT_S);
             _lcd->setTextColor(C_TEXT3);
             char numbuf[4];
             snprintf(numbuf, sizeof(numbuf), "%d", i + 1);
-            _lcd->drawString(numbuf, x + 12, row_y + 10);
+            _lcd->drawString(numbuf, x + 12, row_y + 11);
         }
-        drawText(x + 30, row_y + 4, playlist[i].title, active ? C_PRIMARY : C_TEXT, &g_font_cjk);
-        drawText(x + 30, row_y + 19, playlist[i].subtitle, C_TEXT3, &g_font_cjk);
+        drawText(x + 30, row_y + 5, playlist[i].title, active ? C_PRIMARY : C_TEXT, &g_font_cjk);
+        drawText(x + 30, row_y + 20, playlist[i].subtitle, C_TEXT3, &g_font_cjk);
         // 右侧网络图标
-        _lcd->fillCircle(x + w - 18, row_y + 13, 5, C_ONLINE);
+        _lcd->fillCircle(x + w - 18, row_y + 14, 5, C_ONLINE);
     }
 }
 
@@ -421,16 +430,21 @@ void UI::drawRadioTab() {
     _lcd->setTextColor(C_TEXT3);
     _lcd->drawString("8 频道在线", x + w - 66, y + 8);
 
-    // 分类标签
+    // 分类标签（用 FONT_S 避免溢出）
     int cat_y = y + 24;
     int cx = x + 8;
     for (int i = 0; i < radio_category_count; i++) {
-        int tw = textWidth(radio_categories[i], &g_font_cjk) + 14;
+        _lcd->setFont(FONT_S);
+        int tw = _lcd->textWidth(radio_categories[i]) + 14;
         bool active = (i == cur_radio_cat);
         drawRoundedRect(cx, cat_y, tw, 18, 9, active ? C_PRIMARY : C_SURFACE2);
-        setCJK();
-        drawCenteredText(cx, cat_y, tw, 18, radio_categories[i], active ? C_WHITE : C_TEXT2, &g_font_cjk);
-        cx += tw + 6;
+        _lcd->setTextColor(active ? C_WHITE : C_TEXT2);
+        _lcd->setTextWrap(false);
+        _lcd->setTextDatum(textdatum_t::middle_center);
+        _lcd->drawString(radio_categories[i], cx + tw / 2, cat_y + 9);
+        _lcd->setTextDatum(textdatum_t::top_left);
+        cx += tw + 5;
+        if (cx > x + w) break;  // 防止溢出屏幕
     }
 
     // 当前播放卡片
@@ -445,10 +459,10 @@ void UI::drawRadioTab() {
     _lcd->fillRect(ic_x + 10, ic_y + ic_sz - 10, ic_sz - 20, 6, C_WHITE);
 
     setCJK();
-    drawText(ic_x + ic_sz + 10, card_y + 12, "华语流行 FM", C_TEXT, &g_font_cjk);
-    drawText(ic_x + ic_sz + 10, card_y + 28, "正在播放: 晴天 - 周杰伦", C_TEXT2, &g_font_cjk);
+    drawText(ic_x + ic_sz + 10, card_y + 10, "华语流行 FM", C_TEXT, &g_font_cjk);
+    drawText(ic_x + ic_sz + 10, card_y + 26, "正在播放: 晴天", C_TEXT2, &g_font_cjk);
     _lcd->fillCircle(ic_x + ic_sz + 14, card_y + 44, 3, C_PRIMARY);
-    drawText(ic_x + ic_sz + 22, card_y + 42, "直播中 · 128kbps", C_TEXT3, &g_font_cjk);
+    drawText(ic_x + ic_sz + 22, card_y + 42, "直播中 128k", C_TEXT3, &g_font_cjk);
 
     // 右侧暂停按钮
     _lcd->fillCircle(x + w - 34, card_y + 29, 14, C_PRIMARY);
@@ -506,7 +520,7 @@ void UI::drawSearchTab() {
     _lcd->setTextColor(C_TEXT3);
     _lcd->drawString("Q", x + 22, sb_y + 9);
     setCJK();
-    drawText(x + 40, sb_y + 9, "搜索歌曲、歌手、专辑...", C_TEXT3, &g_font_cjk);
+    drawText(x + 40, sb_y + 9, "搜索歌曲、歌手...", C_TEXT3, &g_font_cjk);
     // 语音按钮（原型右侧圆形，但搜索框内）
     int mic_r = 11;
     int mic_cx = x + w - 24, mic_cy = sb_y + sb_h / 2;
