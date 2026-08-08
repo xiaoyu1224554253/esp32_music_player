@@ -5,6 +5,7 @@
 #include "ui.h"
 #include "lvgl.h"
 #include <string.h>
+#include <stdio.h>
 
 /* ===== 设计令牌 (来自原型 CSS) ===== */
 #define C_BG         lv_color_hex(0x0d0d15)
@@ -71,7 +72,7 @@ static lv_obj_t *nav_items[4];
 static lv_obj_t *tabview;
 
 static lv_obj_t *add_label(lv_obj_t *parent, const char *txt, const lv_font_t *font,
-                           lv_color_t color, lv_align_t align)
+                           lv_color_t color, lv_text_align_t align)
 {
     lv_obj_t *l = lv_label_create(parent);
     lv_label_set_text(l, txt);
@@ -521,10 +522,12 @@ static void build_search(lv_obj_t *parent)
     lv_obj_set_flex_align(status, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
     lv_obj_set_style_pad_all(status, 4, 0);
     lv_obj_set_style_pad_column(status, 6, 0);
-    lv_obj_t *spin = lv_spinner_create(status, 1000, 60);
+    lv_obj_t *spin = lv_spinner_create(status);
+    lv_spinner_set_spin_time(spin, 1000);
     lv_obj_set_size(spin, 11, 11);
     lv_obj_set_style_arc_color(spin, C_PRIMARY, LV_PART_INDICATOR);
     lv_obj_set_style_arc_width(spin, 2, 0);
+    lv_obj_set_style_arc_length(spin, 60, LV_PART_INDICATOR);
     add_label(status, "搜索中...", font_cn_16, C_PRIMARY, LV_TEXT_ALIGN_LEFT);
 
     /* 搜索结果区 */
