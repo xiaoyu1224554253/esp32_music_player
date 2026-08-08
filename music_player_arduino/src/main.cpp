@@ -44,10 +44,13 @@ void loop() {
     uint16_t tx = 0, ty = 0;
     bool pressed = lcd.getTouch(&tx, &ty);
     if (pressed) {
-        // 触摸原始坐标 X/Y 轴方向均与显示相反（rotation=1），手动翻转对齐
-        tx = lcd.width()  - 1 - tx;
-        ty = lcd.height() - 1 - ty;
-        Serial.printf("touch -> %d,%d\n", tx, ty);
+        // LovyanGFX 内置 FT5x06 已按 rotation 校准，但 FT6336 原始坐标轴与显示相反，
+        // 先做轴翻转，再交给 UI（若仍整体偏移，调 offset_rotation）
+        uint16_t w = lcd.width(), h = lcd.height();
+        Serial.printf("raw touch -> %d,%d (w=%d h=%d)\n", tx, ty, w, h);
+        tx = w - 1 - tx;
+        ty = h - 1 - ty;
+        Serial.printf("mapped touch -> %d,%d\n", tx, ty);
         ui.onTouch(tx, ty, true);
         was_pressed = true;
     } else if (was_pressed) {
