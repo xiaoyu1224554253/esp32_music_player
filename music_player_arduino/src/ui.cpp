@@ -295,12 +295,12 @@ void UI::drawPlaylistTab() {
 }
 
 void UI::handlePlaylistTouch(uint16_t x, uint16_t y) {
-    int x = 8, y0 = UI_STATUS_H + 4;
+    int x0 = 8, y0 = UI_STATUS_H + 4;
     int w = SCREEN_WIDTH - 16;
     // 模式按钮
     int bw = (w - 28) / 3;
     for (int i = 0; i < 3; i++) {
-        int bx = x + 10 + i * (bw + 4);
+        int bx = x0 + 10 + i * (bw + 4);
         int by = y0 + 36;
         if (hit(bx, by, bw, 22, x, y)) { play_mode = (PlayMode)i; render(); return; }
     }
@@ -308,7 +308,7 @@ void UI::handlePlaylistTouch(uint16_t x, uint16_t y) {
     int list_y = y0 + 70;
     for (int i = 0; i < playlist_count; i++) {
         int row_y = list_y + i * 38;
-        if (hit(x + 8, row_y - 2, w - 16, 34, x, y)) {
+        if (hit(x0 + 8, row_y - 2, w - 16, 34, x, y)) {
             cur_song = i;
             song_elapsed_ms = 0;
             render(); return;

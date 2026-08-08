@@ -2,6 +2,8 @@
 
 #include <LovyanGFX.hpp>
 #include "config.h"
+#include "lgfx_config.h"
+#include "u8g2_font_wenquanyi_merged.h"
 
 // 中文字体（文泉驿合并点阵，来自参考项目）
 extern lgfx::U8g2font g_font_cjk;
