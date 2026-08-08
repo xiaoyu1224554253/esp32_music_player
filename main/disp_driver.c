@@ -55,8 +55,8 @@ esp_err_t disp_driver_init(void)
     /* ILI9341 面板 (ESP-IDF v6.0 API) */
     esp_lcd_panel_dev_config_t panel_cfg = {
         .reset_gpio_num = PIN_LCD_RST,
-        .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_RGB,
-        .bits_per_pixel = 18,   /* ILI9341V 常用 18bit; 若偏色改 16 */
+        .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_BGR,  /* 参考 freenove 2.8 配置 */
+        .bits_per_pixel = 16,   /* LVGL 默认 RGB565 16bpp, 必须一致 */
         .flags.reset_active_high = 0,
     };
     ESP_RETURN_ON_ERROR(esp_lcd_new_panel_ili9341(io_handle, &panel_cfg, &panel_handle), "disp", "panel");
@@ -64,6 +64,7 @@ esp_err_t disp_driver_init(void)
     ESP_RETURN_ON_ERROR(esp_lcd_panel_init(panel_handle), "disp", "init");
     /* 横屏 320x240 */
     ESP_RETURN_ON_ERROR(esp_lcd_panel_swap_xy(panel_handle, true), "disp", "swap");
+    ESP_RETURN_ON_ERROR(esp_lcd_panel_mirror(panel_handle, false, false), "disp", "mirror");
     ESP_RETURN_ON_ERROR(esp_lcd_panel_set_gap(panel_handle, 0, 0), "disp", "gap");
     ESP_RETURN_ON_ERROR(esp_lcd_panel_invert_color(panel_handle, true), "disp", "inv");
     ESP_RETURN_ON_ERROR(esp_lcd_panel_disp_on_off(panel_handle, true), "disp", "on");

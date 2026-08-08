@@ -20,7 +20,7 @@
 
 #define LCD_H_RES       320
 #define LCD_V_RES       240
-#define LCD_SPI_CLOCK_HZ 40000000    /* ILI9341V 最高约 40MHz */
+#define LCD_SPI_CLOCK_HZ 20000000    /* 参考 freenove 2.8 配置, 保守稳定 */
 #define LCD_SPI_HOST    SPI2_HOST
 
 /* ===== 触摸 FT6336G (I2C) ===== */
