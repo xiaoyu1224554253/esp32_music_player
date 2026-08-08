@@ -2,13 +2,11 @@
 #include <LovyanGFX.hpp>
 #include "config.h"
 #include "lgfx_config.h"
-#include "touch_driver.h"
 #include "ui.h"
 #include "player.h"
 #include "audio_i2s.h"
 
 static LGFX lcd;
-static TouchDriver touch;
 static UI ui;
 
 void setup() {
@@ -31,7 +29,8 @@ void setup() {
         Serial.println("I2S audio init failed (ignore)");
     }
 
-    touch.begin();
+    // LovyanGFX 内置触摸（FT5x06）自动按 rotation 校准坐标
+
     ui.begin(&lcd);
     ui.render();
 
@@ -42,10 +41,11 @@ void setup() {
 void loop() {
     static bool was_pressed = false;
 
-    touch.read();
-    bool pressed = touch.touched();
+    uint16_t tx = 0, ty = 0;
+    bool pressed = lcd.getTouch(&tx, &ty);
     if (pressed) {
-        ui.onTouch(touch.x(), touch.y(), true);
+        Serial.printf("touch -> %d,%d\n", tx, ty);
+        ui.onTouch(tx, ty, true);
         was_pressed = true;
     } else if (was_pressed) {
         was_pressed = false;

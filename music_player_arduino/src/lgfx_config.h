@@ -6,6 +6,7 @@
 class LGFX : public lgfx::LGFX_Device {
     lgfx::Panel_ILI9341 _panel_instance;
     lgfx::Bus_SPI _bus_instance;
+    lgfx::Touch_FT5x06 _touch_instance;
 public:
     LGFX(void) {
         {
@@ -39,6 +40,25 @@ public:
             cfg.dlen_16bit = false;
             cfg.bus_shared = true;
             _panel_instance.config(cfg);
+        }
+        {
+            // FT6336 触摸（FT5x06 兼容），由 LovyanGFX 自动按 rotation 校准坐标
+            auto cfg = _touch_instance.config();
+            cfg.x_min = 0;
+            cfg.x_max = 319;
+            cfg.y_min = 0;
+            cfg.y_max = 239;
+            cfg.pin_int = PIN_TP_INT;
+            cfg.bus_shared = true;
+            cfg.offset_rotation = 0;
+            // I2C 地址 0x38，使用默认 Wire (i2c_port=0)
+            cfg.i2c_port = 0;
+            cfg.i2c_addr = TP_I2C_ADDR;
+            cfg.pin_sda = PIN_TP_SDA;
+            cfg.pin_scl = PIN_TP_SCL;
+            cfg.freq = 100000;
+            _touch_instance.config(cfg);
+            _panel_instance.setTouch(&_touch_instance);
         }
         setPanel(&_panel_instance);
     }
