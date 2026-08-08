@@ -46,18 +46,20 @@ inline uint16_t rgb(uint8_t r, uint8_t g, uint8_t b) {
     return ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3);
 }
 
-#define C_BG            rgb(13, 13, 21)        // #0d0d15
-#define C_SURFACE       rgb(21, 21, 32)        // #151520
-#define C_SURFACE2      rgb(30, 30, 45)        // 卡片/按钮背景
-#define C_PRIMARY       rgb(124, 108, 255)     // #7c6cff
-#define C_ACCENT        rgb(168, 85, 247)      // #a855f7
+#define C_BG            rgb(10, 8, 18)         // #0a0812 更深紫黑背景
+#define C_SURFACE       rgb(18, 16, 28)        // #12101c 主卡片
+#define C_SURFACE2      rgb(28, 24, 42)        // #1c182a 内嵌卡片/输入框
+#define C_PRIMARY       rgb(130, 110, 255)     // #826eff 主紫色
+#define C_ACCENT        rgb(200, 90, 255)      // #c85aff 粉紫强调
 #define C_TEXT          rgb(255, 255, 255)     // 主文字
-#define C_TEXT2         rgb(180, 180, 200)     // 次要文字
-#define C_TEXT3         rgb(120, 120, 150)     // 更淡文字
-#define C_DISABLED      rgb(80, 80, 110)
-#define C_ONLINE        rgb(0, 200, 255)       // 网络来源小圆点/标签
+#define C_TEXT2         rgb(185, 180, 210)     // 次要文字
+#define C_TEXT3         rgb(110, 105, 135)     // 更淡文字
+#define C_DISABLED      rgb(70, 65, 95)
+#define C_ONLINE        rgb(120, 150, 255)     // 网络来源标签
 #define C_WHITE         0xFFFF
 #define C_BLACK         0x0000
+#define C_PINK          rgb(255, 120, 200)     // 封面渐变模拟
+#define C_BLUE          rgb(80, 130, 255)
 
 /* ===== 交互 ===== */
 #define TAB_COUNT       4
