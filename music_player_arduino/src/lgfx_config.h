@@ -12,8 +12,8 @@ public:
             auto cfg = _bus_instance.config();
             cfg.spi_host = SPI2_HOST;
             cfg.spi_mode = 0;
-            cfg.freq_write = 20000000;
-            cfg.freq_read  = 16000000;
+            cfg.freq_write = 10000000;
+            cfg.freq_read  = 8000000;
             cfg.pin_sclk = PIN_LCD_SCK;
             cfg.pin_mosi = PIN_LCD_MOSI;
             cfg.pin_miso = PIN_LCD_MISO;

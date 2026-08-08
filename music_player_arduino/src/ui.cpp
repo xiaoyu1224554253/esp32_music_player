@@ -23,8 +23,14 @@ void UI::setTab(int tab) {
     _tab = tab;
 }
 
-void UI::setCJK() { _lcd->setFont(&g_font_cjk); }
-void UI::setASC() { _lcd->setFont(FONT_M); }
+void UI::setCJK() {
+    _lcd->setFont(&g_font_cjk);
+    _lcd->setTextWrap(false);   // 关键：关闭自动换行，避免中文竖排
+}
+void UI::setASC() {
+    _lcd->setFont(FONT_M);
+    _lcd->setTextWrap(false);
+}
 
 bool UI::hit(int x, int y, int w, int h, uint16_t tx, uint16_t ty) {
     return (tx >= x && tx < x + w && ty >= y && ty < y + h);
@@ -66,6 +72,7 @@ void UI::tick() {
 
 void UI::render() {
     if (!_lcd) return;
+    _lcd->setTextWrap(false);    // 兜底：关闭自动换行，防止任何 print() 中文竖排
     _lcd->startWrite();
     _lcd->fillScreen(C_BG);
     drawStatusBar();
@@ -89,27 +96,35 @@ int16_t UI::textWidth(const char* txt, const lgfx::v1::IFont* font) {
 }
 
 void UI::drawCenteredText(int x, int y, int w, int h, const char* txt, uint16_t c, const lgfx::v1::IFont* font) {
+    if (!txt || !*txt) return;
     _lcd->setFont(font);
     _lcd->setTextColor(c);
-    int16_t tw = _lcd->textWidth(txt);
-    int16_t th = _lcd->fontHeight();
-    _lcd->setCursor(x + (w - tw) / 2, y + (h - th) / 2 + th);
-    _lcd->print(txt);
+    _lcd->setTextWrap(false);                 // 关键：关闭自动换行，避免中文竖排
+    _lcd->setTextDatum(textdatum_t::middle_center);
+    int16_t cx = x + w / 2;
+    int16_t cy = y + h / 2;                     // middle_center 已垂直居中
+    _lcd->drawString(txt, cx, cy);
+    _lcd->setTextDatum(textdatum_t::top_left);
+}
+
+void UI::drawText(int x, int y, const char* txt, uint16_t c, const lgfx::v1::IFont* font) {
+    if (!txt || !*txt) return;
+    _lcd->setFont(font);
+    _lcd->setTextColor(c);
+    _lcd->setTextWrap(false);
+    _lcd->setTextDatum(textdatum_t::top_left);
+    _lcd->drawString(txt, x, y);
 }
 
 // ===== 状态栏 =====
 void UI::drawStatusBar() {
     _lcd->setFont(FONT_S);
+    _lcd->setTextWrap(false);
     _lcd->setTextColor(C_TEXT);
-    _lcd->setCursor(8, 6 + 8);
-    _lcd->print("12:08");
-
+    _lcd->drawString("12:08", 8, 6 + 8);
     _lcd->setTextColor(C_TEXT3);
-    _lcd->setCursor(SCREEN_WIDTH - 70, 6 + 8);
-    _lcd->print("WiFi");
-
-    _lcd->setCursor(SCREEN_WIDTH - 42, 6 + 8);
-    _lcd->print("85%");
+    _lcd->drawString("WiFi", SCREEN_WIDTH - 70, 6 + 8);
+    _lcd->drawString("85%", SCREEN_WIDTH - 42, 6 + 8);
 }
 
 // ===== 底部导航 =====
@@ -131,10 +146,9 @@ void UI::drawNavBar() {
             _lcd->setTextColor(C_TEXT3);
         }
         _lcd->setFont(FONT_S);
-        int16_t tw = _lcd->textWidth(labels[i]);
-        int16_t th = _lcd->fontHeight();
-        _lcd->setCursor(bx + (bw - tw) / 2, by + (UI_NAV_H - 12 - th) / 2 + th - 1);
-        _lcd->print(labels[i]);
+        _lcd->setTextWrap(false);
+        drawCenteredText(bx, by + 2, bw, UI_NAV_H - 12, labels[i],
+                         active ? C_PRIMARY : C_TEXT3, FONT_S);
     }
 }
 
@@ -146,45 +160,41 @@ void UI::drawPlayerTab() {
     drawRoundedRect(x, y, w, h, 12, C_SURFACE);
 
     // 封面
-    int cover_x = x + 14, cover_y = y + 14, cover_w = 76, cover_h = 76;
+    int cover_x = x + 14, cover_y = y + 12, cover_w = 64, cover_h = 64;
     drawRoundedRect(cover_x, cover_y, cover_w, cover_h, 8, C_PRIMARY);
     setCJK();
-    _lcd->setTextColor(C_WHITE);
     drawCenteredText(cover_x, cover_y, cover_w, cover_h, "♪", C_WHITE, &g_font_cjk);
 
     // 标题/歌手
     setCJK();
-    _lcd->setTextColor(C_TEXT);
-    _lcd->setCursor(cover_x + cover_w + 10, cover_y + 20);
-    _lcd->print(playlist[cur_song].title);
-    _lcd->setTextColor(C_TEXT2);
-    _lcd->setCursor(cover_x + cover_w + 10, cover_y + 40);
-    _lcd->print(playlist[cur_song].subtitle);
+    drawText(cover_x + cover_w + 10, cover_y + 14, playlist[cur_song].title, C_TEXT, &g_font_cjk);
+    drawText(cover_x + cover_w + 10, cover_y + 36, playlist[cur_song].subtitle, C_TEXT2, &g_font_cjk);
 
     // 来源标签
-    drawRoundedRect(cover_x + cover_w + 10, cover_y + 54, 44, 14, 4, C_SURFACE2);
-    _lcd->setTextColor(C_ONLINE);
-    _lcd->setCursor(cover_x + cover_w + 16, cover_y + 65);
-    _lcd->print(playlist[cur_song].source);
+    drawRoundedRect(cover_x + cover_w + 10, cover_y + 54, 44, 16, 4, C_SURFACE2);
+    drawText(cover_x + cover_w + 16, cover_y + 58, playlist[cur_song].source, C_ONLINE, &g_font_cjk);
 
-    // 歌词区
-    int ly_y = cover_y + cover_h + 14;
-    drawRoundedRect(x + 12, ly_y, w - 24, 58, 8, C_SURFACE2);
-    for (int i = 0; i < lyric_count; i++) {
-        int ly = ly_y + 10 + i * 11;
+    // 歌词区（最多显示 3 行，避免溢出）
+    int ly_y = cover_y + cover_h + 8;
+    drawRoundedRect(x + 12, ly_y, w - 24, 46, 8, C_SURFACE2);
+    int disp = (lyric_count > 3) ? 3 : lyric_count;
+    int start = lyric_index - 1;
+    if (start < 0) start = 0;
+    if (start + disp > lyric_count) start = lyric_count - disp;
+    for (int i = 0; i < disp; i++) {
+        int idx = start + i;
+        int ly = ly_y + 10 + i * 15;
         setCJK();
-        if (i == lyric_index) {
-            _lcd->setTextColor(C_PRIMARY);
-            _lcd->fillRoundRect(x + 18, ly - 9, w - 36, 12, 4, rgb(45, 40, 80));
+        if (idx == lyric_index) {
+            _lcd->fillRoundRect(x + 18, ly - 8, w - 36, 14, 4, rgb(45, 40, 80));
+            drawText(x + 22, ly - 7, lyric_lines[idx], C_PRIMARY, &g_font_cjk);
         } else {
-            _lcd->setTextColor(C_TEXT3);
+            drawText(x + 22, ly - 7, lyric_lines[idx], C_TEXT3, &g_font_cjk);
         }
-        _lcd->setCursor(x + 22, ly);
-        _lcd->print(lyric_lines[i]);
     }
 
     // 进度条
-    int pb_y = ly_y + 68;
+    int pb_y = ly_y + 60;
     int pb_x = x + 12, pb_w = w - 24;
     _lcd->drawFastHLine(pb_x, pb_y, pb_w, C_DISABLED);
     int fill = (int)((float)song_elapsed_ms / song_duration_ms * pb_w);
@@ -198,28 +208,27 @@ void UI::drawPlayerTab() {
     };
     _lcd->setFont(FONT_S);
     _lcd->setTextColor(C_TEXT3);
-    fmt(song_elapsed_ms, buf); _lcd->setCursor(pb_x, pb_y + 12); _lcd->print(buf);
-    fmt(song_duration_ms, buf); _lcd->setCursor(pb_x + pb_w - 32, pb_y + 12); _lcd->print(buf);
+    fmt(song_elapsed_ms, buf); _lcd->drawString(buf, pb_x, pb_y + 12);
+    fmt(song_duration_ms, buf); _lcd->drawString(buf, pb_x + pb_w - 32, pb_y + 12);
 
     // 控制
-    int cy = pb_y + 34;
+    int cy = pb_y + 32;
     int cx = x + w / 2;
     drawRoundedRect(cx - 40, cy - 14, 80, 28, 14, C_PRIMARY);
     setCJK();
     drawCenteredText(cx - 40, cy - 14, 80, 28, playing ? "暂停" : "播放", C_WHITE, &g_font_cjk);
     _lcd->setTextColor(C_TEXT2);
     _lcd->setFont(FONT_L);
-    _lcd->setCursor(cx - 84, cy + 6);
-    _lcd->print("|<<");
-    _lcd->setCursor(cx + 52, cy + 6);
-    _lcd->print(">>|");
+    _lcd->setTextWrap(false);
+    _lcd->drawString("|<<", cx - 84, cy + 6);
+    _lcd->drawString(">>|", cx + 52, cy + 6);
 }
 
 void UI::handlePlayerTouch(uint16_t x, uint16_t y) {
     int nav_y = SCREEN_HEIGHT - UI_NAV_H;
     (void)nav_y;
     int cx = 8 + (SCREEN_WIDTH - 16) / 2; // 与控制按钮中心大致对齐
-    int cy = UI_STATUS_H + 4 + 200;        // 播放/暂停按钮所在行
+    int cy = UI_STATUS_H + 4 + 172;        // 播放/暂停按钮所在行（与 drawPlayerTab 对齐）
     // 上一首
     if (hit(cx - 84 - 20, cy - 10, 40, 28, x, y)) {
         cur_song = (cur_song - 1 + playlist_count) % playlist_count;
@@ -246,14 +255,8 @@ void UI::drawPlaylistTab() {
     drawRoundedRect(x, y, w, h, 12, C_SURFACE);
 
     setCJK();
-    _lcd->setTextColor(C_TEXT);
-    _lcd->setFont(FONT_L);
-    _lcd->setCursor(x + 12, y + 18);
-    _lcd->print("我的歌单");
-    _lcd->setFont(FONT_S);
-    _lcd->setTextColor(C_TEXT3);
-    _lcd->setCursor(x + w - 86, y + 20);
-    _lcd->print("SD卡 12");
+    drawText(x + 12, y + 14, "我的歌单", C_TEXT, &g_font_cjk);
+    drawText(x + w - 86, y + 18, "SD卡 12", C_TEXT3, &g_font_cjk);
 
     // 模式按钮
     const char* modes[3] = {"顺序", "随机", "单曲"};
@@ -268,29 +271,26 @@ void UI::drawPlaylistTab() {
         drawCenteredText(bx, by, bw, 22, modes[i], active ? C_WHITE : C_TEXT2, &g_font_cjk);
     }
 
-    // 歌曲列表
+    // 歌曲列表（限制行数，避免覆盖底部导航）
     int list_y = y + 70;
-    for (int i = 0; i < playlist_count; i++) {
+    int max_rows = (UI_CONTENT_H - 78) / 38;
+    if (max_rows > playlist_count) max_rows = playlist_count;
+    for (int i = 0; i < max_rows; i++) {
         int row_y = list_y + i * 38;
         if (i == cur_song) {
             drawRoundedRect(x + 8, row_y - 2, w - 16, 34, 6, rgb(25, 22, 45));
             _lcd->setTextColor(C_PRIMARY);
             _lcd->setFont(FONT_S);
-            _lcd->setCursor(x + 16, row_y + 14);
-            _lcd->print(">");
+            _lcd->drawString(">", x + 16, row_y + 10);
         }
         setCJK();
-        _lcd->setTextColor(C_TEXT);
-        _lcd->setCursor(x + 28, row_y + 8);
-        _lcd->print(playlist[i].title);
-        _lcd->setTextColor(C_TEXT3);
-        _lcd->setCursor(x + 28, row_y + 22);
-        _lcd->print(playlist[i].subtitle);
+        drawText(x + 28, row_y + 8, playlist[i].title, C_TEXT, &g_font_cjk);
+        drawText(x + 28, row_y + 22, playlist[i].subtitle, C_TEXT3, &g_font_cjk);
         _lcd->setTextColor(i == cur_song ? C_PRIMARY : C_TEXT3);
+        _lcd->setFont(FONT_S);
         char numbuf[4];
         snprintf(numbuf, sizeof(numbuf), "%d", i + 1);
-        _lcd->setCursor(x + w - 40, row_y + 8);
-        _lcd->print(numbuf);
+        _lcd->drawString(numbuf, x + w - 40, row_y + 8);
     }
 }
 
@@ -323,14 +323,8 @@ void UI::drawRadioTab() {
     drawRoundedRect(x, y, w, h, 12, C_SURFACE);
 
     setCJK();
-    _lcd->setTextColor(C_TEXT);
-    _lcd->setFont(FONT_L);
-    _lcd->setCursor(x + 12, y + 16);
-    _lcd->print("电台");
-    _lcd->setFont(FONT_S);
-    _lcd->setTextColor(C_TEXT3);
-    _lcd->setCursor(x + w - 80, y + 20);
-    _lcd->print("8 在线");
+    drawText(x + 12, y + 14, "电台", C_TEXT, &g_font_cjk);
+    drawText(x + w - 80, y + 18, "8 在线", C_TEXT3, &g_font_cjk);
 
     // 分类标签
     int cat_y = y + 36;
@@ -352,41 +346,29 @@ void UI::drawRadioTab() {
     setCJK();
     _lcd->setTextColor(C_WHITE);
     drawCenteredText(x + 16, card_y + 8, 48, 48, "R", C_WHITE, &g_font_cjk);
-    _lcd->setTextColor(C_TEXT);
-    _lcd->setCursor(x + 72, card_y + 14);
-    _lcd->print("华语流行 FM");
-    _lcd->setTextColor(C_TEXT2);
-    _lcd->setCursor(x + 72, card_y + 30);
-    _lcd->print("正在播放: 晴天");
-    _lcd->fillCircle(x + 72, card_y + 46, 3, C_PRIMARY);
-    _lcd->setTextColor(C_TEXT3);
-    _lcd->setCursor(x + 80, card_y + 49);
-    _lcd->print("直播 128kbps");
-    drawRoundedRect(x + w - 50, card_y + 18, 32, 32, 16, C_PRIMARY);
+    drawText(x + 72, card_y + 12, "华语流行 FM", C_TEXT, &g_font_cjk);
+    drawText(x + 72, card_y + 28, "正在播放: 晴天", C_TEXT2, &g_font_cjk);
+    _lcd->fillCircle(x + 72, card_y + 44, 3, C_PRIMARY);
+    drawText(x + 80, card_y + 47, "直播 128kbps", C_TEXT3, &g_font_cjk);
+    drawRoundedRect(x + w - 50, card_y + 16, 32, 32, 16, C_PRIMARY);
     setCJK();
-    drawCenteredText(x + w - 50, card_y + 18, 32, 32, "暂停", C_WHITE, &g_font_cjk);
+    drawCenteredText(x + w - 50, card_y + 16, 32, 32, "暂停", C_WHITE, &g_font_cjk);
 
     // 电台列表
-    int list_y = card_y + 74;
+    int list_y = card_y + 66;
     const char* radios[2] = {"华语流行 FM", "古典音乐厅"};
     const char* descs[2] = {"热歌 24 小时", "古典不间断"};
     const char* freqs[2] = {"FM 88.7", "FM 91.5"};
     uint16_t colors[2] = {C_PRIMARY, C_ACCENT};
     for (int i = 0; i < 2; i++) {
-        int row_y = list_y + i * 38;
+        int row_y = list_y + i * 34;
         drawRoundedRect(x + 10, row_y, 34, 28, 4, colors[i]);
         setCJK();
         _lcd->setTextColor(C_WHITE);
         drawCenteredText(x + 10, row_y, 34, 28, i == 0 ? "播" : "乐", C_WHITE, &g_font_cjk);
-        _lcd->setTextColor(C_TEXT);
-        _lcd->setCursor(x + 52, row_y + 6);
-        _lcd->print(radios[i]);
-        _lcd->setTextColor(C_TEXT3);
-        _lcd->setCursor(x + 52, row_y + 20);
-        _lcd->print(descs[i]);
-        _lcd->setTextColor(C_PRIMARY);
-        _lcd->setCursor(x + w - 60, row_y + 10);
-        _lcd->print(freqs[i]);
+        drawText(x + 52, row_y + 6, radios[i], C_TEXT, &g_font_cjk);
+        drawText(x + 52, row_y + 20, descs[i], C_TEXT3, &g_font_cjk);
+        drawText(x + w - 60, row_y + 10, freqs[i], C_PRIMARY, &g_font_cjk);
     }
 }
 
@@ -413,19 +395,14 @@ void UI::drawSearchTab() {
     int sb_y = y + 12;
     drawRoundedRect(x + 8, sb_y, w - 52, 26, 10, C_SURFACE2);
     setCJK();
-    _lcd->setTextColor(C_TEXT3);
-    _lcd->setCursor(x + 18, sb_y + 17);
-    _lcd->print("搜索歌曲、歌手...");
+    drawText(x + 18, sb_y + 8, "搜索歌曲、歌手...", C_TEXT3, &g_font_cjk);
     drawRoundedRect(x + w - 40, sb_y, 32, 26, 8, C_PRIMARY);
-    _lcd->setTextColor(C_WHITE);
     drawCenteredText(x + w - 40, sb_y, 32, 26, "语音", C_WHITE, &g_font_cjk);
 
     // 历史
     int hist_y = sb_y + 36;
     setCJK();
-    _lcd->setTextColor(C_TEXT3);
-    _lcd->setCursor(x + 10, hist_y);
-    _lcd->print("历史");
+    drawText(x + 10, hist_y, "历史", C_TEXT3, &g_font_cjk);
     int hx = x + 12;
     for (int i = 0; i < search_history_count; i++) {
         int tw = textWidth(search_history[i], &g_font_cjk) + 16;
@@ -438,20 +415,13 @@ void UI::drawSearchTab() {
     // 搜索结果
     int res_y = hist_y + 36;
     setCJK();
-    _lcd->setTextColor(C_TEXT3);
-    _lcd->setCursor(x + 10, res_y);
-    _lcd->print("结果");
+    drawText(x + 10, res_y, "结果", C_TEXT3, &g_font_cjk);
     for (int i = 0; i < search_result_count; i++) {
         int row_y = res_y + 12 + i * 32;
         drawRoundedRect(x + 10, row_y, 34, 26, 4, C_SURFACE2);
-        _lcd->setTextColor(C_PRIMARY);
         drawCenteredText(x + 10, row_y, 34, 26, "♪", C_PRIMARY, &g_font_cjk);
-        _lcd->setTextColor(C_TEXT);
-        _lcd->setCursor(x + 52, row_y + 6);
-        _lcd->print(search_results[i].title);
-        _lcd->setTextColor(C_TEXT3);
-        _lcd->setCursor(x + 52, row_y + 20);
-        _lcd->print(search_results[i].subtitle);
+        drawText(x + 52, row_y + 6, search_results[i].title, C_TEXT, &g_font_cjk);
+        drawText(x + 52, row_y + 20, search_results[i].subtitle, C_TEXT3, &g_font_cjk);
     }
 
     // 滚动条

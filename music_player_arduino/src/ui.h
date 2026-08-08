@@ -33,7 +33,10 @@ private:
     void drawSearchTab();
 
     void drawRoundedRect(int x, int y, int w, int h, int r, uint16_t c);
+    // 关闭自动换行 + 居中绘制（横排中文）
     void drawCenteredText(int x, int y, int w, int h, const char* txt, uint16_t c, const lgfx::v1::IFont* font);
+    // 左上对齐绘制，关闭自动换行
+    void drawText(int x, int y, const char* txt, uint16_t c, const lgfx::v1::IFont* font);
     int16_t textWidth(const char* txt, const lgfx::v1::IFont* font);
     void setCJK();   // 切换中文字体
     void setASC();   // 切换英文字体
