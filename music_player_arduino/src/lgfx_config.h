@@ -42,22 +42,22 @@ public:
             _panel_instance.config(cfg);
         }
         {
-            // FT6336 触摸（FT5x06 兼容），由 LovyanGFX 自动按 rotation 校准坐标
+            // FT6336 触摸（FT5x06 兼容）。x_max/y_max 必须填物理面板原始分辨率
+            // (240宽 x 320高)，LovyanGFX 再按 offset_rotation 旋转到显示坐标系。
             auto cfg = _touch_instance.config();
             cfg.x_min = 0;
-            cfg.x_max = 319;
+            cfg.x_max = 239;   // 物理宽
             cfg.y_min = 0;
-            cfg.y_max = 239;
+            cfg.y_max = 319;   // 物理高
             cfg.pin_int = PIN_TP_INT;
             cfg.bus_shared = true;
-            cfg.offset_rotation = 0;
             // I2C 地址 0x38，使用默认 Wire (i2c_port=0)
             cfg.i2c_port = 0;
             cfg.i2c_addr = TP_I2C_ADDR;
             cfg.pin_sda = PIN_TP_SDA;
             cfg.pin_scl = PIN_TP_SCL;
             cfg.freq = 100000;
-            cfg.offset_rotation = LCD_ROTATION;  // 让 LGFX 把物理触摸旋转到显示坐标系
+            cfg.offset_rotation = LCD_ROTATION;  // rotation=1: 把 240x320 物理旋转到 320x240 显示
             _touch_instance.config(cfg);
             _panel_instance.setTouch(&_touch_instance);
         }
