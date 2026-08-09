@@ -46,7 +46,6 @@ static int utf8Len(const char* s) {
 // ---------- 状态栏 ----------
 void UI::begin(LGFX* lcd) {
     this->lcd = lcd;
-    g_font_cjk.begin(lcd);
     lcd->setFont(&g_font_cjk);
 }
 
