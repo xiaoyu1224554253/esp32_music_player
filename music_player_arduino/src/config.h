@@ -59,5 +59,13 @@ inline uint16_t rgb(uint8_t r, uint8_t g, uint8_t b) {
 #define C_WHITE         0xFFFF
 #define C_BLACK         0x0000
 
+/* ===== 触摸出厂校准默认值 (dispX = a*rx + e, dispY = c*ry + f) =====
+   由 3 次 5 点校准实测取平均得出，清 NVS 后作为默认映射，
+   免每次重新校准。串口发 'c' 可重新校准并覆盖 NVS。 */
+#define CAL_A_DEFAULT  -1.019f
+#define CAL_E_DEFAULT  318.8f
+#define CAL_C_DEFAULT  -1.201f
+#define CAL_F_DEFAULT  259.5f
+
 /* ===== 交互 ===== */
 #define TAB_COUNT       4

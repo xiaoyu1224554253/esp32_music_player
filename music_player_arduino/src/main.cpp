@@ -12,10 +12,10 @@ static UI ui;
 static Preferences touchNVS;
 
 // ===== 触摸校准参数 (dispX = a*rx + e, dispY = c*ry + f) =====
-static float cal_a = -1.164f;   // 默认经验值（未校准时使用）
-static float cal_e = 331.7f;
-static float cal_c = -1.278f;
-static float cal_f = 259.5f;
+static float cal_a = CAL_A_DEFAULT;   // 出厂校准默认值（清 NVS 时使用）
+static float cal_e = CAL_E_DEFAULT;
+static float cal_c = CAL_C_DEFAULT;
+static float cal_f = CAL_F_DEFAULT;
 
 // ===== 校准流程状态 =====
 enum { CAL_IDLE, CAL_RUNNING, CAL_DONE };
