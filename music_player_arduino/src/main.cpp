@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <LovyanGFX.hpp>
+#include <Wire.h>
 #include "config.h"
 #include "lgfx_config.h"
 #include "ui.h"
@@ -8,6 +9,22 @@
 
 static LGFX lcd;
 static UI ui;
+
+// FT6336 原始触摸读取（绕过 LovyanGFX 自动校准，自行映射到显示坐标系）
+// 物理面板: 宽 240(X:0..239) 高 320(Y:0..319)，横屏 rotation=1 显示 320x240
+static bool ft6336_read(uint16_t* px, uint16_t* py) {
+    Wire.beginTransmission(TP_I2C_ADDR);
+    Wire.write(0x02);  // 触摸点数 + 第1点 X/Y
+    if (Wire.endTransmission(false) != 0) return false;
+    if (Wire.requestFrom((int)TP_I2C_ADDR, 4) != 4) return false;
+    uint8_t b[4];
+    for (int i = 0; i < 4; i++) b[i] = Wire.read();
+    uint8_t points = b[0] >> 2;
+    if (points == 0) return false;
+    *px = ((uint16_t)(b[0] & 0x0F) << 8) | b[1];  // 物理 X (0..239)
+    *py = ((uint16_t)(b[2] & 0x0F) << 8) | b[3];  // 物理 Y (0..319)
+    return true;
+}
 
 void setup() {
     Serial.begin(115200);
@@ -21,6 +38,9 @@ void setup() {
     lcd.setBrightness(128);
     lcd.setRotation(LCD_ROTATION);
     lcd.fillScreen(C_BG);
+
+    // FT6336 裸读取使用的 I2C（与 LGFX 触摸同引脚 SDA16/SCL15）
+    Wire.begin(PIN_TP_SDA, PIN_TP_SCL);
 
     // 音频 I2S 初始化（失败不影响 UI）
     if (audio_i2s_init(PIN_I2S_BCLK, PIN_I2S_LRCLK, PIN_I2S_DOUT, PIN_I2S_MCLK, 44100)) {
@@ -41,17 +61,16 @@ void setup() {
 void loop() {
     static bool was_pressed = false;
 
-    uint16_t tx = 0, ty = 0;
-    bool pressed = lcd.getTouch(&tx, &ty);
-    if (pressed) {
-        // LovyanGFX 内置 FT5x06 已按 rotation 校准，但 FT6336 原始坐标轴与显示相反，
-        // 先做轴翻转，再交给 UI（若仍整体偏移，调 offset_rotation）
-        uint16_t w = lcd.width(), h = lcd.height();
-        Serial.printf("raw touch -> %d,%d (w=%d h=%d)\n", tx, ty, w, h);
-        tx = w - 1 - tx;
-        ty = h - 1 - ty;
-        Serial.printf("mapped touch -> %d,%d\n", tx, ty);
-        ui.onTouch(tx, ty, true);
+    uint16_t phys_x = 0, phys_y = 0;
+    if (ft6336_read(&phys_x, &phys_y)) {
+        // 物理面板 240(宽,X) x 320(高,Y)，横屏显示 320x240
+        // 映射: 显示X = 物理Y, 显示Y = 物理X（rotation=1）
+        uint16_t dx = phys_y;            // 0..319 -> 显示 X
+        uint16_t dy = phys_x;            // 0..239 -> 显示 Y
+        Serial.printf("phys -> %d,%d | disp(no-flip) -> %d,%d | flip -> %d,%d\n",
+                      phys_x, phys_y, dx, dy, 319 - dx, 239 - dy);
+        // 当前采用: 无额外翻转（如仍反，改下一行）
+        ui.onTouch(dx, dy, true);
         was_pressed = true;
     } else if (was_pressed) {
         was_pressed = false;

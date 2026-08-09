@@ -58,7 +58,8 @@ public:
             cfg.pin_scl = PIN_TP_SCL;
             cfg.freq = 100000;
             _touch_instance.config(cfg);
-            _panel_instance.setTouch(&_touch_instance);
+            // 触摸改由 main.cpp 自行裸读 FT6336（见 ft6336_read），不交给 LGFX 自动校准
+            // _panel_instance.setTouch(&_touch_instance);
         }
         setPanel(&_panel_instance);
     }
