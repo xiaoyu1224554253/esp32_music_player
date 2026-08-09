@@ -6,7 +6,6 @@
 class LGFX : public lgfx::LGFX_Device {
     lgfx::Panel_ILI9341 _panel_instance;
     lgfx::Bus_SPI _bus_instance;
-    lgfx::Touch_FT5x06 _touch_instance;
 public:
     LGFX(void) {
         {
@@ -41,26 +40,7 @@ public:
             cfg.bus_shared = true;
             _panel_instance.config(cfg);
         }
-        {
-            // FT6336 触摸（FT5x06 兼容）。x_max/y_max 必须填物理面板原始分辨率
-            // (240宽 x 320高)，LovyanGFX 再按 offset_rotation 旋转到显示坐标系。
-            auto cfg = _touch_instance.config();
-            cfg.x_min = 0;
-            cfg.x_max = 239;   // 物理宽
-            cfg.y_min = 0;
-            cfg.y_max = 319;   // 物理高
-            cfg.pin_int = PIN_TP_INT;
-            cfg.bus_shared = true;
-            // I2C 地址 0x38，使用默认 Wire (i2c_port=0)
-            cfg.i2c_port = 0;
-            cfg.i2c_addr = TP_I2C_ADDR;
-            cfg.pin_sda = PIN_TP_SDA;
-            cfg.pin_scl = PIN_TP_SCL;
-            cfg.freq = 100000;
-            cfg.offset_rotation = LCD_ROTATION;  // rotation=1: 把 240x320 物理旋转到 320x240 显示
-            _touch_instance.config(cfg);
-            _panel_instance.setTouch(&_touch_instance);
-        }
+        // 触摸由 main.cpp 自行裸读 FT6336（见 ft6336_read），不交给 LovyanGFX
         setPanel(&_panel_instance);
     }
 };
