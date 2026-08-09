@@ -11,22 +11,23 @@ static LGFX lcd;
 static UI ui;
 
 // FT6336 原始触摸读取（自行映射，不依赖 LovyanGFX 校准）
-// 寄存器(FT5x06 兼容): 0x00=TD_STATUS, 0x01=P1_XH, 0x02=P1_XL, 0x03=P1_YH, 0x04=P1_YL
+// FT5x06 寄存器: 0x00=TD_STATUS(点数), 0x02=P1_XH, 0x03=P1_XL, 0x04=P1_YH, 0x05=P1_YL
 // 物理面板: 宽 240(X:0..239) 高 320(Y:0..319)
 static bool ft6336_read(uint16_t* px, uint16_t* py) {
-    Wire.beginTransmission(TP_I2C_ADDR);
-    Wire.write(0x01);
-    if (Wire.endTransmission(false) != 0) return false;
-    uint8_t b[4];
-    if (Wire.requestFrom((int)TP_I2C_ADDR, 4) != 4) return false;
-    for (int i = 0; i < 4; i++) b[i] = Wire.read();
-    // 读触摸点数确认有按下
+    // 读触摸点数
     Wire.beginTransmission(TP_I2C_ADDR);
     Wire.write(0x00);
     if (Wire.endTransmission(false) != 0) return false;
     uint8_t points = 0;
     if (Wire.requestFrom((int)TP_I2C_ADDR, 1) == 1) points = Wire.read();
     if (points == 0) return false;
+    // 读第1点坐标
+    Wire.beginTransmission(TP_I2C_ADDR);
+    Wire.write(0x02);
+    if (Wire.endTransmission(false) != 0) return false;
+    uint8_t b[4];
+    if (Wire.requestFrom((int)TP_I2C_ADDR, 4) != 4) return false;
+    for (int i = 0; i < 4; i++) b[i] = Wire.read();
     *px = ((uint16_t)(b[0] & 0x0F) << 8) | b[1];  // 物理 X (0..239)
     *py = ((uint16_t)(b[2] & 0x0F) << 8) | b[3];  // 物理 Y (0..319)
     return true;
