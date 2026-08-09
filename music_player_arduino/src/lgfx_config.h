@@ -57,9 +57,9 @@ public:
             cfg.pin_sda = PIN_TP_SDA;
             cfg.pin_scl = PIN_TP_SCL;
             cfg.freq = 100000;
+            cfg.offset_rotation = LCD_ROTATION;  // 让 LGFX 把物理触摸旋转到显示坐标系
             _touch_instance.config(cfg);
-            // 触摸改由 main.cpp 自行裸读 FT6336（见 ft6336_read），不交给 LGFX 自动校准
-            // _panel_instance.setTouch(&_touch_instance);
+            _panel_instance.setTouch(&_touch_instance);
         }
         setPanel(&_panel_instance);
     }
