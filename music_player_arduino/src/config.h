@@ -56,6 +56,9 @@ inline uint16_t rgb(uint8_t r, uint8_t g, uint8_t b) {
 #define C_TEXT3         rgb(120, 120, 150)      // 更淡文字
 #define C_DISABLED      rgb(60, 60, 85)
 #define C_ONLINE        rgb(0, 200, 255)        // 网络来源标签
+#define C_SDCARD        rgb(100, 220, 130)      // SD卡来源标签(绿)
+#define C_NAV_SEL_BG    rgb(26, 23, 52)         // 底栏选中半透明紫底(近似 rgba(124,108,255,.08))
+#define C_TRACK_LINE    rgb(42, 42, 62)         // 列表分隔线
 #define C_WHITE         0xFFFF
 #define C_BLACK         0x0000
 
