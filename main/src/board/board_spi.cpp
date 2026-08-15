@@ -39,16 +39,10 @@ void board_spi_init(void)
         s_ui_spi_mtx = xSemaphoreCreateRecursiveMutex();
     }
 
-    // ---- 屏幕 CS 安全态 ----
+    // ---- 屏幕 CS 安全态（LovyanGFX 内部会自行接管 SPI 总线）----
     pinMode(PIN_TFT_CS, OUTPUT);
     digitalWrite(PIN_TFT_CS, HIGH);
 
-    // ---- UI SPI (TFT) ----
-    ::SPI.end();
-    ::SPI.begin(PIN_SPI_UI_SCK, PIN_SPI_UI_MISO, PIN_SPI_UI_MOSI, -1);
-
-    Serial.printf("[总线] UI SPI: SCK=%d MOSI=%d MISO=%d\n",
-                  PIN_SPI_UI_SCK, PIN_SPI_UI_MOSI, PIN_SPI_UI_MISO);
     Serial.printf("[总线] TFT: CS=%d DC=%d RST=%d\n",
                   PIN_TFT_CS, PIN_TFT_DC, PIN_TFT_RST);
     Serial.printf("[总线] 背光 GPIO=%d 功放使能 GPIO=%d 触摸 I2C SDA=%d SCL=%d\n",

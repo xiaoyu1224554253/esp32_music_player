@@ -89,3 +89,9 @@ bool board_hw_set_amp_shutdown(bool enabled);
 bool board_hw_get_amp_shutdown();
 
 void board_hw_debug_dump();
+
+// 电磁铁驱动已移除（目标板无 TC118S），保留空声明兼容调用点。
+void board_hw_solenoid_tick();
+void board_hw_solenoid_stop();
+void board_hw_solenoid_flip(uint32_t pulse_ms = 150);
+bool board_hw_solenoid_is_busy();

@@ -285,6 +285,26 @@ void board_hw_debug_dump()
          s_amp_mute_enabled ? 1 : 0);
 }
 
+void board_hw_solenoid_tick()
+{
+    // 目标板无电磁铁，空操作。
+}
+
+void board_hw_solenoid_stop()
+{
+    // 目标板无电磁铁，空操作。
+}
+
+void board_hw_solenoid_flip(uint32_t /*pulse_ms*/)
+{
+    // 目标板无电磁铁，空操作。
+}
+
+bool board_hw_solenoid_is_busy()
+{
+    return false;
+}
+
 void board_hw_power_off()
 {
     LOGI("[硬件控制] ES3C28P 无电源自锁，关机仅熄屏+静音");
