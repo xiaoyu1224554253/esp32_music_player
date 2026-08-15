@@ -2,6 +2,7 @@
 
 #include <LovyanGFX.hpp>
 #include <Wire.h>
+#include <driver/i2c.h>
 #include "board/board_pins.h"
 
 /*
@@ -26,8 +27,6 @@ public:
         cfg.freq_write = 40000000;
         cfg.freq_read  = 16000000;
         cfg.spi_3wire  = true;
-        cfg.use_dma    = true;
-        cfg.dma_channel = 1;
         cfg.pin_sclk = PIN_SPI_UI_SCK;
         cfg.pin_mosi = PIN_SPI_UI_MOSI;
         cfg.pin_miso = PIN_SPI_UI_MISO;
@@ -57,11 +56,11 @@ public:
         // ---- FT6336G 触摸 ----
         auto tp = _touch_instance.config();
         tp.i2c_port   = I2C_NUM_1;
-        tp.i2c_addr   = TP_I2C_ADDR;
-        tp.pin_sda    = PIN_TP_SDA;
-        tp.pin_scl    = PIN_TP_SCL;
-        tp.pin_int    = PIN_TP_INT;
-        tp.pin_rst    = PIN_TP_RST;
+        tp.i2c_addr   = board::TP_I2C_ADDR;
+        tp.pin_sda    = board::PIN_TP_SDA;
+        tp.pin_scl    = board::PIN_TP_SCL;
+        tp.pin_int    = board::PIN_TP_INT;
+        tp.pin_rst    = board::PIN_TP_RST;
         tp.x_min      = 0;
         tp.x_max      = SCR_W - 1;
         tp.y_min      = 0;
