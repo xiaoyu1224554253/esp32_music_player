@@ -24,8 +24,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install platformio
 
-      - name: Build (pio run) — Arduino music player
-        working-directory: music_player_arduino
+      - name: Build (pio run) — Arduino music player (ES3C28P port)
+        working-directory: main
         run: pio run -e esp32-s3-devkitc-1
 
       - name: Upload firmware artifacts
@@ -33,7 +33,7 @@ jobs:
         with:
           name: platformio-firmware
           path: |
-            music_player_arduino/.pio/build/*/firmware.bin
-            music_player_arduino/.pio/build/*/partitions.bin
-            music_player_arduino/.pio/build/*/bootloader.bin
+            main/.pio/build/*/firmware.bin
+            main/.pio/build/*/partitions.bin
+            main/.pio/build/*/bootloader.bin
           if-no-files-found: warn

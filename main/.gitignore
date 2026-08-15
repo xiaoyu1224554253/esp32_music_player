@@ -1,0 +1,7 @@
+# PlatformIO build directory
+.pio/
+
+# TF card structure folder
+TF卡结构/
+
+.pio/

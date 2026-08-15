@@ -1,0 +1,23 @@
+#pragma once
+#include <stdbool.h>
+#include <stdint.h>
+
+bool audio_init();
+void audio_stop();
+bool audio_play(const char* path); // 自动识别 .mp3 / .flac
+bool audio_play_stream_mp3(const char* url); // HTTP MP3 流
+bool audio_play_stream_mp3_from_offset(const char* url, uint32_t start_offset); // HTTP MP3 Range 跳过 ID3 起播
+void audio_loop();
+bool audio_is_playing();
+
+void     audio_set_volume(uint8_t percent);  // 0~100
+uint8_t  audio_get_volume(void);
+uint16_t audio_get_gain_q15(void);           // 0~32768 (Q15)
+
+uint32_t audio_get_play_ms();
+uint32_t audio_get_total_ms();   // 0 = unknown
+void     audio_set_total_ms(uint32_t ms);
+uint32_t audio_probe_total_ms(const char* path);
+void     audio_reset_play_pos();
+// 当前解码器支持时，开播前预解码一段 PCM 到软件缓冲；返回已缓存的音频时长。
+uint32_t audio_prime_pcm_ms(uint32_t target_ms, uint32_t max_chunks);
