@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <SPI.h>
+#include <Wire.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/semphr.h>
 
@@ -31,9 +32,9 @@ void board_spi_init(void)
     pinMode(board::PIN_I2S_EN, OUTPUT);
     digitalWrite(board::PIN_I2S_EN, LOW);
 
-    // ---- 触摸 I2C 总线 (FT6336) ----
-    Wire.begin(board::PIN_TP_SDA, board::PIN_TP_SCL);
-    Wire.setClock(400000);
+    // 注: 触摸 FT6336 的 I2C 由 LovyanGFX Touch_FT5x06 自行托管
+    // (gc9a01_lgfx.h 中 bus_shared=true, I2C_NUM_1), 这里不再初始化 Wire,
+    // 避免与屏幕触摸总线端口冲突。
 
     if (!s_ui_spi_mtx) {
         s_ui_spi_mtx = xSemaphoreCreateRecursiveMutex();
