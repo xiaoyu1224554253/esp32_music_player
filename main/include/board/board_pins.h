@@ -90,6 +90,7 @@ constexpr int PIN_KEY_MCP_NEXT_LIST = -1;
 // NFC 相关 (无硬件, 全部禁用)
 constexpr int PIN_NFC_CS  = -1;
 constexpr int PIN_NFC_IRQ = -1;
+#define PIN_RC522_CS   board::PIN_NFC_CS   // 兼容 nfc.cpp 裸宏
 
 // 蓝牙电源控制 (无, 禁用)
 constexpr int PIN_POWER_CTRL = -1;
