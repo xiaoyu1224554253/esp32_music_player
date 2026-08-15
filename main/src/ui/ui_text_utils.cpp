@@ -3,7 +3,7 @@
 #include <math.h>
 
 // 封面尺寸常量（需要与 ui.cpp 保持一致）
-static constexpr int COVER_SIZE = 240;
+static constexpr int COVER_SIZE = 220;
 
 // 外部声明 TFT 对象
 extern LGFX tft;
@@ -175,7 +175,7 @@ void draw_center_text(const char* s, int y)
 {
   extern lgfx::U8g2font g_font_cjk;
   tft.setFont(&g_font_cjk);
-  int16_t x = (COVER_SIZE - tft.textWidth(s)) / 2;
+  int16_t x = (SCR_W - tft.textWidth(s)) / 2;
   if (x < 0) x = 0;
   tft.setCursor(x, y);
   tft.print(s);
@@ -232,15 +232,14 @@ void init_circle_lut()
 
 void circle_span(int y, int pad, int& x0, int& w)
 {
-  init_circle_lut();
-
+  // ES3C28P 矩形屏 320x240：取消圆形裁剪，改为全宽矩形可见区域。
   if (y < 0) y = 0;
-  if (y >= 240) y = 239;
+  if (y >= SCR_H) y = SCR_H - 1;
   if (pad < 0) pad = 0;
-  if (pad >= 10) pad = 9;
+  if (pad >= 20) pad = 19;
 
-  x0 = (int)s_circle_lut[y][pad].x0;
-  w  = (int)s_circle_lut[y][pad].w;
+  x0 = pad;
+  w  = SCR_W - 2 * pad;
 }
 
 void fmt_mmss(uint32_t ms, char out[6])

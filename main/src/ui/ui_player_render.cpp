@@ -141,7 +141,7 @@ static void draw_volume_step_hint_overlay(LGFX_Sprite* dst)
   // 弹窗宽度收窄，避免在圆屏安全区边缘显得太长。
   static constexpr int BOX_W = 100;
   static constexpr int BOX_H = 32;
-  static constexpr int BOX_X = (240 - BOX_W) / 2;
+  static constexpr int BOX_X = (320 - BOX_W) / 2;
   static constexpr int BOX_Y = (240 - BOX_H) / 2;
   static constexpr int BOX_R = 9;
 
@@ -253,7 +253,7 @@ static void draw_track_change_popup_overlay(LGFX_Sprite* dst)
   // 所以弹窗不能按 240 方屏铺太宽，否则左右下角会出圆屏。
   static constexpr int BOX_W = 184;
   static constexpr int BOX_H = 38;
-  static constexpr int BOX_X = (240 - BOX_W) / 2;
+  static constexpr int BOX_X = (320 - BOX_W) / 2;
   static constexpr int BOX_Y = 154;
   static constexpr int BOX_R = 10;
   static constexpr int PAD_X = 10;
@@ -313,7 +313,7 @@ static void draw_nfc_bind_target_popup_canvas(CanvasT* dst, uint8_t selected)
   // 保持和音量步进提示一致的“居中黑色圆角弹窗”风格，尺寸稍大以容纳三项选择。
   static constexpr int BOX_W = 168;
   static constexpr int BOX_H = 88;
-  static constexpr int BOX_X = (240 - BOX_W) / 2;
+  static constexpr int BOX_X = (320 - BOX_W) / 2;
   static constexpr int BOX_Y = (240 - BOX_H) / 2;
   static constexpr int BOX_R = 14;
 
@@ -526,7 +526,7 @@ static void draw_nfc_scan_popup_canvas(CanvasT* dst)
   // 标题和绑定状态合并到一行后，高度可以从 118px 收到 100px。
   static constexpr int BOX_W = 220;
   static constexpr int BOX_H = 100;
-  static constexpr int BOX_X = (240 - BOX_W) / 2;
+  static constexpr int BOX_X = (320 - BOX_W) / 2;
   static constexpr int BOX_Y = (240 - BOX_H) / 2;
   static constexpr int BOX_R = 14;
 
@@ -652,7 +652,7 @@ void ui_draw_battery_footer(LGFX_Sprite* dst)
     static constexpr int TEXT_W = 28;
     static constexpr int GAP = 1;
     static constexpr int TOTAL_W = ICON_W + GAP + TEXT_W;
-    static constexpr int X = (240 - TOTAL_W) / 2;
+    static constexpr int X = (320 - TOTAL_W) / 2;
 
     uint16_t color = TFT_LIGHTGREY;
 
@@ -847,12 +847,12 @@ static constexpr int COVER_PANEL_SIDE_Y =
     COVER_PANEL_PLAY_Y + (COVER_PANEL_PLAY_R - COVER_PANEL_SIDE_R);
 
 // 上一曲 / 下一曲 X 坐标。
-// 数值越靠近 120，按钮越靠中间。
-static constexpr int COVER_PANEL_PREV_X = 93;
-static constexpr int COVER_PANEL_NEXT_X = 147;
+// 数值越靠近 120，按钮越靠中间。ES3C28P 矩形屏中心 160 (+40)。
+static constexpr int COVER_PANEL_PREV_X = 133;
+static constexpr int COVER_PANEL_NEXT_X = 187;
 
 // 播放按钮 X 坐标。
-static constexpr int COVER_PANEL_PLAY_X = 120;
+static constexpr int COVER_PANEL_PLAY_X = 160;
 
 // 导航反馈：上/下/无
 static volatile int8_t s_cover_panel_nav_feedback = 0;
@@ -930,7 +930,7 @@ static constexpr int COVER_PANEL_HUB_R = 14;
 
 // 唱片圆心：跟面板凸起中心一致。
 // 这样面板盖住下半部分后，只露出上半圆。
-static constexpr int COVER_PANEL_RECORD_CX = 120;
+static constexpr int COVER_PANEL_RECORD_CX = 160;
 static constexpr int COVER_PANEL_RECORD_CY = COVER_PANEL_BUMP_CY;
 
 // 唱片半径。
@@ -1467,7 +1467,7 @@ static void draw_cover_panel_skin(LGFX_Sprite* dst)
   if (!dst) return;
 
   if (cover_panel_ensure_skin_sprite()) {
-    s_cover_panel_skin_spr->pushSprite(dst, 0, COVER_PANEL_SKIN_Y, COVER_PANEL_SKIN_KEY);
+    s_cover_panel_skin_spr->pushSprite(dst, 40, COVER_PANEL_SKIN_Y, COVER_PANEL_SKIN_KEY);
     return;
   }
 
@@ -1507,7 +1507,7 @@ static const String& cover_panel_display_title()
 
 static bool cover_panel_text_span(int y, int pad, int& x0, int& w)
 {
-  static constexpr int CX = 120;
+  static constexpr int CX = 160;
   static constexpr int CY = 120;
 
   const int R = COVER_PANEL_INNER_R;  // 这里用 114，给外圈进度弧留空间
@@ -1688,7 +1688,7 @@ static void draw_scrolling_line_by_time(LGFX_Sprite* dst,
   dst->setTextSize(1);
   dst->setTextWrap(false);
 
-  const int available_w = 240 - safe_pad * 2;
+  const int available_w = 320 - safe_pad * 2;
   const int text_w = dst->textWidth(text);
 
   if (text_w <= available_w) {
@@ -2049,7 +2049,7 @@ static void draw_cover_panel_progress_ring(LGFX_Sprite* dst)
   if (progress < 0.0f) progress = 0.0f;
   if (progress > 1.0f) progress = 1.0f;
 
-  const int cx = 120;
+  const int cx = 160;
   const int cy = 120;
   const int r  = COVER_PANEL_PROGRESS_R;
 

@@ -434,9 +434,9 @@ static void ui_task_entry(void*)
         tft.setTextWrap(false);
         
         // 轻量占位图
-        tft.drawCircle(120, 88, 36, TFT_DARKGREY);
-        tft.drawCircle(120, 88, 37, TFT_DARKGREY);
-        tft.fillCircle(120, 88, 4, TFT_WHITE);
+        tft.drawCircle(160, 88, 36, TFT_DARKGREY);
+        tft.drawCircle(160, 88, 37, TFT_DARKGREY);
+        tft.fillCircle(160, 88, 4, TFT_WHITE);
 
         tft.setTextColor(TFT_WHITE, TFT_BLACK);
 

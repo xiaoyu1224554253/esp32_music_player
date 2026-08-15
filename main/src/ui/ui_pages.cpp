@@ -103,9 +103,9 @@ void ui_show_player_placeholder(const char* line1, const char* line2)
   tft.setTextWrap(false);
 
   // 简单画一个唱片占位图
-  tft.drawCircle(120, 82, 38, TFT_DARKGREY);
-  tft.drawCircle(120, 82, 39, TFT_DARKGREY);
-  tft.fillCircle(120, 82, 5, TFT_WHITE);
+  tft.drawCircle(160, 82, 38, TFT_DARKGREY);
+  tft.drawCircle(160, 82, 39, TFT_DARKGREY);
+  tft.fillCircle(160, 82, 5, TFT_WHITE);
 
   tft.setTextSize(1);
   tft.setTextColor(TFT_WHITE, TFT_BLACK);
@@ -356,7 +356,7 @@ void ui_scan_begin()
 static void draw_scan_dots(int phase)
 {
   // 计算点的中心位置和间距
-  int cx = 120;
+  int cx = 160;
   int y  = 155;
   int dx = 18;
 

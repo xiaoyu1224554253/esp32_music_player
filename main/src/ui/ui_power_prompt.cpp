@@ -49,15 +49,15 @@ static uint16_t stage_accent_color(const char* line1)
 static void draw_soft_background()
 {
     // 轻量竖向暗色渐变，不使用大 Sprite，避免关机阶段额外内存压力。
-    for (int y = 0; y < COVER_SIZE; ++y) {
+    for (int y = 0; y < SCR_H; ++y) {
         const uint8_t step = (uint8_t)(y >> 4);
         const uint16_t c = (y < 120) ? (uint16_t)(COLOR_BG_TOP + step) : COLOR_BG_BOTTOM;
-        tft.drawFastHLine(0, y, COVER_SIZE, c);
+        tft.drawFastHLine(0, y, SCR_W, c);
     }
 
-    tft.drawCircle(120, 120, 118, 0x1082);
-    tft.drawCircle(120, 120, 106, 0x0841);
-    tft.drawCircle(120, 120, 84, 0x0008);
+    tft.drawCircle(160, 120, 118, 0x1082);
+    tft.drawCircle(160, 120, 106, 0x0841);
+    tft.drawCircle(160, 120, 84, 0x0008);
 }
 
 static void draw_power_icon(int cx, int cy, uint16_t accent, bool done, bool warn)
@@ -143,13 +143,13 @@ void ui_power_show_shutdown_stage(const char* line1, const char* line2)
 
     draw_soft_background();
 
-    // 主卡片：留出圆屏边缘，避免文字贴边。
-    tft.fillRoundRect(24, 45, 192, 148, 18, COLOR_CARD_SHADOW);
-    tft.fillRoundRect(20, 39, 200, 148, 18, COLOR_CARD);
-    tft.drawRoundRect(20, 39, 200, 148, 18, COLOR_CARD_EDGE);
-    tft.drawFastHLine(42, 91, 156, COLOR_ACCENT_DIM);
+    // 主卡片：矩形屏 320 宽居中。
+    tft.fillRoundRect(64, 45, 192, 148, 18, COLOR_CARD_SHADOW);
+    tft.fillRoundRect(60, 39, 200, 148, 18, COLOR_CARD);
+    tft.drawRoundRect(60, 39, 200, 148, 18, COLOR_CARD_EDGE);
+    tft.drawFastHLine(82, 91, 156, COLOR_ACCENT_DIM);
 
-    draw_power_icon(120, 70, accent, done, warn);
+    draw_power_icon(160, 70, accent, done, warn);
 
     tft.setFont(&g_font_cjk);
     tft.setTextWrap(false);

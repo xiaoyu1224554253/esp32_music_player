@@ -20,7 +20,7 @@
  * - 电池状态缓存状态   
  */
 
-static constexpr int COVER_SIZE = 240;                      // 封面大小
+static constexpr int COVER_SIZE = 220;                      // 封面大小 (ES3C28P 矩形屏适配)
 static constexpr float COVER_DEG_PER_SEC = 15.0f;           // 封面旋转角度 FPS
 static constexpr uint32_t UI_FPS_ROTATE = 15;               // 封面旋转 FPS
 static constexpr uint32_t UI_FPS_COVER_PANEL = 13;          // 封面面板滚动 FPS
