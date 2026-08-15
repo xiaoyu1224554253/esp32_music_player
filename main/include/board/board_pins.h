@@ -36,6 +36,14 @@ constexpr int PIN_SD_D1   = 40;
 constexpr int PIN_SD_D2   = 39;
 constexpr int PIN_SD_D3   = 41;
 
+// SD 引脚裸宏（兼容 storage.cpp 原 PIN_SD_* 用法）
+#define PIN_SD_CLK   board::PIN_SD_CLK
+#define PIN_SD_CMD   board::PIN_SD_CMD
+#define PIN_SD_D0    board::PIN_SD_D0
+#define PIN_SD_D1    board::PIN_SD_D1
+#define PIN_SD_D2    board::PIN_SD_D2
+#define PIN_SD_D3    board::PIN_SD_D3
+
 // 原项目用 1-bit SPI SD, 本板 SDIO 4-bit。保留 SPI SD 宏名映射到 SDIO 引脚，
 // 但 SDIO 模式需要单独初始化(SDMMC)。 lib_sd.cpp 会按本板适配。
 constexpr int PIN_SD_CS   = PIN_SD_D3; // 4-bit 模式下 CS=D3, 实际由 SDMMC 接管

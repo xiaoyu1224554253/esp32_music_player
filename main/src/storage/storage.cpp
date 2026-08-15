@@ -13,8 +13,8 @@
 SdFat sd;
 
 // ES3C28P TF 卡物理接在 SDIO 引脚，SdFat 以 SPI 模式驱动（SCK=CLK/MOSI=CMD/MISO=D0/CS=D3）。
-// 使用 SPI3(VSPI=3) 避免与屏幕 SPI2 冲突。
-SPIClass SPI_SD(VSPI);
+// 使用 SPI3(host=3) 避免与屏幕 SPI2 冲突。
+SPIClass SPI_SD(3);
 
 static volatile bool storage_ready = false;
 static volatile bool s_recent_io_error = false;
