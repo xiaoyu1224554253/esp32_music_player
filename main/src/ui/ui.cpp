@@ -39,9 +39,8 @@ SemaphoreHandle_t s_ui_mtx = nullptr;
 bool s_rotate_wait_prefetch_done = false;
 
 ui_screen_t s_screen = UI_SCREEN_BOOT;
-// 全局显示对象引用 gfx 单例（屏幕与触摸共用同一实例）
-LGFX_ES3C28P gfx;
-LGFX& tft = gfx;
+// 全局显示对象 (LGFX_ES3C28P 实例，含 FT6336 触摸)
+LGFX tft;
 bool s_screen_cleared = false;
 uint32_t s_player_enter_time = 0;
 

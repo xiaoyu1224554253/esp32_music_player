@@ -72,8 +72,9 @@ public:
     }
 };
 
-// 全局单例：在 ui.cpp 中定义，其它 TU 通过 extern 引用，避免多实例。
-extern LGFX_ES3C28P gfx;
+// 全局显示对象 (LGFX_ES3C28P 实例)，在 ui.cpp 中定义，其它 TU 通过 extern 引用。
+// 屏幕与触摸共用同一实例，避免多实例导致触摸读不到屏幕状态。
+extern LGFX tft;
 
 // 原项目别名：LGFX = LGFX_ES3C28P
 typedef LGFX_ES3C28P LGFX;
